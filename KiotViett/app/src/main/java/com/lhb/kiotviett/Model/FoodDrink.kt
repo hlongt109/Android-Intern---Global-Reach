@@ -1,4 +1,4 @@
-package com.lhb.kiotviett
+package com.lhb.kiotviett.Model
 
 data class FoodDrink(
     val id: String,
