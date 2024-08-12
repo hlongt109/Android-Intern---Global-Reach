@@ -20,6 +20,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.lhb.kiotviett.Model.FoodDrink
+import com.lhb.kiotviett.View.component.ItemFoodDrink
+import com.lhb.kiotviett.View.component.ItemMenu
+import com.lhb.kiotviett.View.component.TopBar
 
 @Composable
 fun FoodAndDrinkScreen() {

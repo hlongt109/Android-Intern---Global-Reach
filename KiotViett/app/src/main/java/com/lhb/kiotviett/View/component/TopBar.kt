@@ -1,4 +1,4 @@
-package com.lhb.kiotviett.View
+package com.lhb.kiotviett.View.component
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
