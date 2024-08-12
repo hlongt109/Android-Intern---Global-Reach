@@ -21,13 +21,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import com.example.kiotviet.avtivities.component.ItemTypes
 import com.example.kiotviet.avtivities.component.RoomItem
 import com.example.kiotviet.models.Category
 import com.example.kiotviet.models.Room
 
 @Composable
-fun AllScreen(){
+fun AllScreen(navController: NavController){
 
     var selectedIndex by remember { mutableStateOf<Category?>(null) }
 
