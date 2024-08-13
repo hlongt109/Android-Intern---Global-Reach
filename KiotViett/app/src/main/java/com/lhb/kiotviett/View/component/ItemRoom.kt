@@ -26,6 +26,7 @@ import java.text.SimpleDateFormat
 fun RoomItem(
     room: Room,
     modifier: Modifier = Modifier,
+    onClick: () -> Unit
 ) {
     Column(
         modifier = modifier
@@ -34,7 +35,10 @@ fun RoomItem(
             .shadow(3.dp, RoundedCornerShape(20.dp))
             .background(Color.White)
             .clip(RoundedCornerShape(20.dp))
-            .padding(16.dp),
+            .padding(16.dp)
+            .clickable {
+                onClick()
+            },
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {

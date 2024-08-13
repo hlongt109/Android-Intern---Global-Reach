@@ -85,6 +85,7 @@ fun CreateProductScreen(navController: NavController) {
             .fillMaxSize()
             .background(Color(0xFFf5f5f5))
             .statusBarsPadding()
+            .navigationBarsPadding()
     ) {
         Row(
             modifier = Modifier
@@ -99,7 +100,7 @@ fun CreateProductScreen(navController: NavController) {
             ) {
                 IconButton(
                     onClick = {
-
+                        navController.popBackStack()
                     }
                 ) {
                     Icon(

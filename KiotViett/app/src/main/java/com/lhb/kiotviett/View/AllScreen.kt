@@ -26,6 +26,7 @@ import com.example.kiotviet.avtivities.component.ItemTypes
 import com.example.kiotviet.avtivities.component.RoomItem
 import com.example.kiotviet.models.Category
 import com.example.kiotviet.models.Room
+import com.lhb.kiotviett.View.navigator.ScreenNames
 
 @Composable
 fun AllScreen(navController: NavController){
@@ -101,6 +102,7 @@ fun AllScreen(navController: NavController){
                         RoomItem(
                             room = item,
                             modifier = Modifier.weight(1f),
+                            onClick = {navController.navigate(ScreenNames.FoodAndDrinkScreen.route)}
                         )
                     }
                     if (rowItems.size < 2) {

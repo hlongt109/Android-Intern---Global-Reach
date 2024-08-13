@@ -42,6 +42,7 @@ import com.lhb.kiotviett.View.component.CustomBigButton
 import com.lhb.kiotviett.View.component.CustomOutlinedTextField
 import com.lhb.kiotviett.View.component.CustomOutlinedTextField1
 import com.lhb.kiotviett.View.component.TopBarSingle
+import com.lhb.kiotviett.View.navigator.ScreenNames
 
 @Composable
 fun LoginScreen(navController: NavController){
@@ -144,7 +145,7 @@ fun LoginScreen(navController: NavController){
             CustomOutlinedTextField(value = matKhauState, onValueChange = {matKhauState = it}, label = "Mật khẩu", modifier = Modifier)
 
             Spacer(modifier = Modifier.height(40.dp))
-            CustomBigButton(title = "Đăng nhập", onClick = {})
+            CustomBigButton(title = "Đăng nhập", onClick = {navController.navigate(ScreenNames.DrawerNavigationScreen.route)})
 
             Spacer(modifier = Modifier.height(60.dp))
             Row (
@@ -155,7 +156,7 @@ fun LoginScreen(navController: NavController){
                 Text(text = "Bạn chưa có tài khoản?", color = Color(0xff303030), fontSize = 18.sp)
                 Spacer(modifier = Modifier.width(8.dp))
                 TextButton(
-                    onClick = { /*TODO*/ }
+                    onClick = { navController.navigate(ScreenNames.SignUpScreen.route)}
                 ) {
                     Text(text = "Đăng ký ngay", color = Color(0xff005595), fontSize = 18.sp, fontWeight = FontWeight.SemiBold)
                 }

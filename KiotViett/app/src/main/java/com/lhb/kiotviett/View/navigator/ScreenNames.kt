@@ -7,4 +7,12 @@ enum class ScreenNames(val route: String) {
     OrderSummaryScreen("order_summary_screen"),
     PaymentScreen("payment_screen"),
     PaymentMethodScreen("payment_method_screen"),
+    HomeScreen("Home"),
+    AddProduct("AddProduct"),
+    ChooseProductScreen("ChooseProduct"),
+    CreateGroupProduct("CreateGroupProduct"),
+    ChooseGroupProduct("ChooseGroupProduct"),
+    SignUpScreen("SignUp"),
+    DrawerNavigationScreen("DrawerNavigationScreen"),
+    CreateProductScreen("CreateProduct"),
 }

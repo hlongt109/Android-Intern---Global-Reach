@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.IconButton
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBackIosNew
 import androidx.compose.material.icons.filled.ArrowDropDown
@@ -64,12 +65,16 @@ fun SignUp(navController: NavController){
             .statusBarsPadding()
     ) {
         Spacer(modifier = Modifier.padding(top = 10.dp))
-        Icon(
-            Icons.Default.ArrowBackIosNew,
-            contentDescription = null,
-            modifier = Modifier.size(30.dp)
-        )
-
+        IconButton(
+            onClick = {
+            navController.popBackStack()
+        }) {
+            Icon(
+                Icons.Default.ArrowBackIosNew,
+                contentDescription = null,
+                modifier = Modifier.size(30.dp)
+            )
+        }
         Spacer(modifier = Modifier.padding(top = 20.dp))
         Text(
             text = "Tạo tài khoản dùng thử miễn phí",
@@ -143,7 +148,10 @@ fun SignUp(navController: NavController){
         Spacer(modifier = Modifier.padding(top = 10.dp))
 
         CustomBigButton(
-            title = "Tiếp tục"
+            title = "Tiếp tục",
+            onClick = {
+                navController.popBackStack()
+            }
         )
 
 

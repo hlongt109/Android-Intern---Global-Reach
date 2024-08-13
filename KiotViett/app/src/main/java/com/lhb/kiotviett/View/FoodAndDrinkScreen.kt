@@ -70,7 +70,9 @@ fun FoodAndDrinkScreen(
             Column(
                 modifier = Modifier.fillMaxWidth()
             ) {
-                TopBar(title = "Phòng VIP 1", onBackClick = {navController.popBackStack()})
+                TopBar(title = "Phòng VIP 1", onBackClick = {navController.popBackStack()},
+                    onClickAdd = {navController.navigate(ScreenNames.CreateProductScreen.route)}
+                )
                 Spacer(modifier = Modifier.height(5.dp))
                 LazyRow(
                     modifier = Modifier.padding(start = 15.dp, end = 15.dp, bottom = 10.dp)

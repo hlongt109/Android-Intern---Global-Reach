@@ -32,7 +32,8 @@ import androidx.compose.ui.unit.sp
 @Composable
 fun TopBar(
     title: String,
-    onBackClick: () -> Unit
+    onBackClick: () -> Unit,
+    onClickAdd: () -> Unit
 ) {
     Row(
         modifier = Modifier
@@ -71,6 +72,7 @@ fun TopBar(
         ) {
             IconButton(
                 onClick = {
+                    onClickAdd()
                 }
             ) {
                 Icon(

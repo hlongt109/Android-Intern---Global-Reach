@@ -101,7 +101,7 @@ fun CreateGroupProduct(navController: NavController) {
         },
         bottomBar = {
             Column(
-                modifier = Modifier.padding(10.dp)
+                modifier = Modifier.padding(10.dp).navigationBarsPadding()
             ) {
                 Button(
                     onClick = { /*TODO*/ },
@@ -120,7 +120,7 @@ fun CreateGroupProduct(navController: NavController) {
                         fontWeight = FontWeight.Bold,
                     )
                 }
-                Spacer(modifier = Modifier.padding(5.dp))
+                Spacer(modifier = Modifier.padding(15.dp))
             }
         }
     ) { innerPadding ->
