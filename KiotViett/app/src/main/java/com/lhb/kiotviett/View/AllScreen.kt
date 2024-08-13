@@ -21,20 +21,34 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import com.example.kiotviet.avtivities.component.ItemTypes
 import com.example.kiotviet.avtivities.component.RoomItem
 import com.example.kiotviet.models.Category
 import com.example.kiotviet.models.Room
+import com.lhb.kiotviett.View.navigator.ScreenNames
 
 @Composable
-fun AllScreen(){
+fun AllScreen(navController: NavController){
 
     var selectedIndex by remember { mutableStateOf<Category?>(null) }
 
     val listRoom = listOf(
         Room(id = "1", nameRoom = "Phòng VIP 1", category = "1"),
+        Room(id = "1", nameRoom = "Phòng VIP 2", category = "1"),
+        Room(id = "1", nameRoom = "Phòng VIP 3", category = "1"),
+        Room(id = "1", nameRoom = "Phòng VIP 4", category = "1"),
+        Room(id = "1", nameRoom = "Phòng VIP 5", category = "1"),
         Room(id = "1", nameRoom = "Bàn 1", category = "2"),
+        Room(id = "1", nameRoom = "Bàn 2", category = "2"),
+        Room(id = "1", nameRoom = "Bàn 3", category = "2"),
+        Room(id = "1", nameRoom = "Bàn 4", category = "2"),
+        Room(id = "1", nameRoom = "Bàn 5", category = "2"),
         Room(id = "1", nameRoom = "Bàn 1", category = "3"),
+        Room(id = "1", nameRoom = "Bàn 2", category = "3"),
+        Room(id = "1", nameRoom = "Bàn 3", category = "3"),
+        Room(id = "1", nameRoom = "Bàn 4", category = "3"),
+        Room(id = "1", nameRoom = "Bàn 5", category = "3"),
     )
 
     val listCategory = listOf(
@@ -52,7 +66,7 @@ fun AllScreen(){
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color(0xFFDDDDDD))
+            .background(Color(0xFFf4f6f8))
             .padding(10.dp),
     ) {
 
@@ -88,6 +102,7 @@ fun AllScreen(){
                         RoomItem(
                             room = item,
                             modifier = Modifier.weight(1f),
+                            onClick = {navController.navigate(ScreenNames.FoodAndDrinkScreen.route)}
                         )
                     }
                     if (rowItems.size < 2) {
