@@ -28,6 +28,7 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
 import com.example.kiotviet.avtivities.component.ItemTypes
+import com.example.kiotviet.avtivities.component.LearnNavDrawer
 import com.example.kiotviet.avtivities.component.ToolBar
 import com.example.kiotviet.models.Category
 
@@ -40,15 +41,12 @@ fun HomeScreen(navController: NavController) {
         modifier = Modifier
             .fillMaxSize()
             .background(Color(0xFFdddddd))
-            .statusBarsPadding()
     ) {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
                 .background(Color.White)
         ) {
-            ToolBar()
-
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -62,19 +60,23 @@ fun HomeScreen(navController: NavController) {
                     Scaffold(
                         topBar = {
                             TabRow(selectedTabIndex = selectedTabIndex, contentColor = Color.Black) {
-                                Tab(selected = selectedTabIndex == 0, onClick = { selectedTabIndex = 0 }) {
-                                    Text("Tất cả", modifier = Modifier.padding(16.dp), fontWeight = FontWeight.Bold, color = if(selectedTabIndex == 0) Color(0xFF0067c7) else Color.Black)
+                                Tab(selected = selectedTabIndex == 0, onClick = { selectedTabIndex = 0 }, modifier = Modifier.background(Color.White)) {
+                                    Text("Tất cả", modifier = Modifier
+                                        .padding(16.dp)
+                                        .background(Color.White), fontWeight = FontWeight.Bold, color = if(selectedTabIndex == 0) Color(0xFF0067c7) else Color.Black)
                                 }
-                                Tab(selected = selectedTabIndex == 1, onClick = { selectedTabIndex = 1 }) {
+                                Tab(selected = selectedTabIndex == 1, onClick = { selectedTabIndex = 1 }, modifier = Modifier.background(Color.White)) {
                                     Text("Sử dụng", modifier = Modifier.padding(16.dp), fontWeight = FontWeight.Bold, color = if(selectedTabIndex == 1) Color(0xFF0067c7) else Color.Black)
                                 }
-                                Tab(selected = selectedTabIndex == 2, onClick = { selectedTabIndex = 2 }) {
+                                Tab(selected = selectedTabIndex == 2, onClick = { selectedTabIndex = 2 }, modifier = Modifier.background(Color.White)) {
                                     Text("Còn trống", modifier = Modifier.padding(16.dp), fontWeight = FontWeight.Bold, color = if(selectedTabIndex == 2) Color(0xFF0067c7) else Color.Black)
                                 }
                             }
                         }
                     ) { innerPadding ->
-                        Box(modifier = Modifier.padding(innerPadding)) {
+                        Box(modifier = Modifier
+                            .padding(innerPadding)
+                            .background(Color.White)) {
                             when (selectedTabIndex) {
                                 0 -> AllScreen(navController)
                                 1 -> UseScreen(navController)

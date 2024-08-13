@@ -42,7 +42,8 @@ fun ItemTypes(
             fontSize = 16.sp,
             fontWeight = FontWeight.Medium,
             textAlign = TextAlign.Center,
-            modifier = Modifier.padding(10.dp)
+            modifier = Modifier.padding(10.dp),
+            color = Color(0xFF4c5154)
         )
     }
 
