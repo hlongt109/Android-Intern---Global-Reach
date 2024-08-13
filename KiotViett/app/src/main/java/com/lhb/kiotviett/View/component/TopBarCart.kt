@@ -12,8 +12,12 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Add
+import androidx.compose.material.icons.outlined.ArrowBackIos
 import androidx.compose.material.icons.outlined.Close
+import androidx.compose.material.icons.outlined.MenuBook
+import androidx.compose.material.icons.outlined.MoreVert
 import androidx.compose.material.icons.outlined.Search
+import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -30,14 +34,15 @@ import androidx.compose.ui.unit.sp
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TopBar(
+fun TopBarCart(
     title: String,
     onBackClick: () -> Unit
 ) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .height(60.dp),
+            .height(60.dp)
+            .background(Color.White),
 
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween
@@ -52,7 +57,7 @@ fun TopBar(
                 }
             ) {
                 Icon(
-                    Icons.Outlined.Close, contentDescription = "",
+                    Icons.Outlined.ArrowBackIos, contentDescription = "",
                     modifier = Modifier.size(26.dp),
                     tint = Color(0xff303030)
                 )
@@ -74,7 +79,7 @@ fun TopBar(
                 }
             ) {
                 Icon(
-                    Icons.Outlined.Add, contentDescription = "",
+                    Icons.Outlined.MenuBook, contentDescription = "",
                     modifier = Modifier.size(50.dp)
                         .clip(RoundedCornerShape(25.dp))
                         .background(Color(0xfff5f5f5))
@@ -87,8 +92,9 @@ fun TopBar(
                 onClick = { }
             ) {
                 Icon(
-                    Icons.Outlined.Search, contentDescription = "",
-                    modifier = Modifier.size(50.dp)
+                    Icons.Outlined.MoreVert, contentDescription = "",
+                    modifier = Modifier
+                        .size(50.dp)
                         .clip(RoundedCornerShape(25.dp))
                         .background(Color(0xfff5f5f5))
                         .padding(7.dp),
@@ -97,9 +103,6 @@ fun TopBar(
             }
         }
     }
+    Divider(modifier = Modifier.background(Color(0xff303030)))
 }
-//@Preview(showBackground = true)
-//@Composable
-//fun PreviewTopBar(){
-//    TopBar(title = "Phong VIP 1")
-//}
+

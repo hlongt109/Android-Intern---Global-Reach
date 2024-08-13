@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -12,6 +13,7 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -19,13 +21,18 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import com.lhb.kiotviett.Model.FoodDrink
+import com.lhb.kiotviett.View.component.BottomBarProductScreen
 import com.lhb.kiotviett.View.component.ItemFoodDrink
 import com.lhb.kiotviett.View.component.ItemMenu
 import com.lhb.kiotviett.View.component.TopBar
+import com.lhb.kiotviett.View.navigator.ScreenNames
 
 @Composable
-fun FoodAndDrinkScreen() {
+fun FoodAndDrinkScreen(
+    navController: NavController
+) {
     val fakeProduct = listOf(
         FoodDrink("p1", "Name 1", 50000, "","Bia & Thuốc Lá"),
         FoodDrink("p2", "Name 2", 50000, "","Classic Cocktails"),
@@ -44,7 +51,9 @@ fun FoodAndDrinkScreen() {
     val fakeMenu = listOf(
         "Tất cả", "Bia & Thuốc Lá", "Classic Cocktails", "Món Khai Vị", "Món Chính", "Súp", "Tea"
     )
-    var selectedIndex by remember { mutableStateOf(0) }
+    var selectedIndex by remember { mutableIntStateOf(0) }
+
+    var itemCartNumber by remember { mutableIntStateOf(0) }
 
     val filterProduct = if(selectedIndex == 0){
         fakeProduct
@@ -54,12 +63,14 @@ fun FoodAndDrinkScreen() {
 
     Scaffold(
         containerColor = Color(0xffffffff),
-        modifier = Modifier.statusBarsPadding(),
+        modifier = Modifier
+            .statusBarsPadding()
+            .navigationBarsPadding(),
         topBar = {
             Column(
                 modifier = Modifier.fillMaxWidth()
             ) {
-                TopBar(title = "Phòng VIP 1")
+                TopBar(title = "Phòng VIP 1", onBackClick = {navController.popBackStack()})
                 Spacer(modifier = Modifier.height(5.dp))
                 LazyRow(
                     modifier = Modifier.padding(start = 15.dp, end = 15.dp, bottom = 10.dp)
@@ -75,6 +86,17 @@ fun FoodAndDrinkScreen() {
                     }
                 }
             }
+        },
+        bottomBar = {
+            if(itemCartNumber != 0){
+                BottomBarProductScreen(
+                    onClickToCancel = {
+                        itemCartNumber = 0
+                    },
+                    onClickToSaveCart = { navController.navigate(ScreenNames.CartScreen.route) },
+                    productNumber = 1
+                )
+            }
         }
     ) { innerPadding ->
         Column(
@@ -87,6 +109,12 @@ fun FoodAndDrinkScreen() {
                 items(filterProduct.size) { index ->
                     ItemFoodDrink(
                         foodDrink = filterProduct[index],
+                        onClick = {
+                            itemCartNumber += 1
+                        },
+                        onItemSelectedNumber = { number ->
+
+                        }
                     )
                 }
             }
@@ -94,8 +122,8 @@ fun FoodAndDrinkScreen() {
     }
 }
 
-@Preview(showBackground = true)
-@Composable
-fun PreviewScreen() {
-    FoodAndDrinkScreen()
-}
+//@Preview(showBackground = true)
+//@Composable
+//fun PreviewScreen() {
+//    FoodAndDrinkScreen()
+//}
