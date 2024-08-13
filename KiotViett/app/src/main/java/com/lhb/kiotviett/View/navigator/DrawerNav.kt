@@ -228,7 +228,7 @@ fun DrawerNavigation(navController: NavController){
                             selected = false,
                             onClick = {
                                 coroutineScope.launch { drawerState.close() }
-                                navigationController.navigate("Home") { popUpTo(0) }
+                                navController.navigate(ScreenNames.LoginScreen.route) { popUpTo(0) }
                             }
                         )
                         Spacer(modifier = Modifier.padding(5.dp))
