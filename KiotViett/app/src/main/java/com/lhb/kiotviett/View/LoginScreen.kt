@@ -65,7 +65,7 @@ fun LoginScreen(navController: NavController){
                 ){
                     Image(
                         painter = painterResource(id = R.drawable.logo1), contentDescription = "",
-                        modifier = Modifier.height(60.dp)
+                        modifier = Modifier.padding(top = 15.dp).height(60.dp)
                     )
                     Spacer(modifier = Modifier.width(15.dp))
                     Image(
@@ -75,7 +75,7 @@ fun LoginScreen(navController: NavController){
                             .clip(RoundedCornerShape(15.dp))
                     )
                 }
-                Spacer(modifier = Modifier.height(15.dp))
+                Spacer(modifier = Modifier.height(20.dp))
                 Text(text = "Bar - Cafe, Nhà hàng, Karaoke & Billiards",
                     color = Color(0xff005595),
                     fontWeight = FontWeight.Medium,
