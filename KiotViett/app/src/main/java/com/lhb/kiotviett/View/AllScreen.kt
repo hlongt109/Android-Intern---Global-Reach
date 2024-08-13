@@ -34,8 +34,20 @@ fun AllScreen(navController: NavController){
 
     val listRoom = listOf(
         Room(id = "1", nameRoom = "Phòng VIP 1", category = "1"),
+        Room(id = "1", nameRoom = "Phòng VIP 2", category = "1"),
+        Room(id = "1", nameRoom = "Phòng VIP 3", category = "1"),
+        Room(id = "1", nameRoom = "Phòng VIP 4", category = "1"),
+        Room(id = "1", nameRoom = "Phòng VIP 5", category = "1"),
         Room(id = "1", nameRoom = "Bàn 1", category = "2"),
+        Room(id = "1", nameRoom = "Bàn 2", category = "2"),
+        Room(id = "1", nameRoom = "Bàn 3", category = "2"),
+        Room(id = "1", nameRoom = "Bàn 4", category = "2"),
+        Room(id = "1", nameRoom = "Bàn 5", category = "2"),
         Room(id = "1", nameRoom = "Bàn 1", category = "3"),
+        Room(id = "1", nameRoom = "Bàn 2", category = "3"),
+        Room(id = "1", nameRoom = "Bàn 3", category = "3"),
+        Room(id = "1", nameRoom = "Bàn 4", category = "3"),
+        Room(id = "1", nameRoom = "Bàn 5", category = "3"),
     )
 
     val listCategory = listOf(
@@ -53,7 +65,7 @@ fun AllScreen(navController: NavController){
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color(0xFFDDDDDD))
+            .background(Color(0xFFf4f6f8))
             .padding(10.dp),
     ) {
 
