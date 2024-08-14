@@ -36,5 +36,8 @@ val Typography = Typography(
 )
 
 val OpenSans = FontFamily(
-    Font(R.font.opensans_normal, FontWeight.Normal)
+    Font(R.font.opensans_normal, FontWeight.Normal),
+    Font(R.font.opensans_bold, FontWeight.Bold),
+    Font(R.font.opensans_regular, FontWeight.Medium),
+    Font(R.font.opensans_light, FontWeight.Light)
 )
