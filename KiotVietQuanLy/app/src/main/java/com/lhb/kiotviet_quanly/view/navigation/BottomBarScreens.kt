@@ -1,4 +1,4 @@
-package com.lhb.kiotviet_quanly.view.navigator
+package com.lhb.kiotviet_quanly.view.navigation
 
 sealed class BottomBarScreens(val screen: String){
    data object OverViewManager : BottomBarScreens("OverViewManager")

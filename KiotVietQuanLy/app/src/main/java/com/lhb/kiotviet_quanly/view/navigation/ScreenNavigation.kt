@@ -23,5 +23,6 @@ fun ScreenNavigation(){
         composable(ScreenName.WelcomeScreen.route){ WelcomeScreen(navController = navController) }
         composable(ScreenName.SignUpScreen.route){ SignUpScreen(navController = navController)}
         composable(ScreenName.SignInScreen.route) { SignInScreen(navController = navController)}
+        composable(ScreenName.BottomTav.route){ BottomTav(navController) }
     }
 }
