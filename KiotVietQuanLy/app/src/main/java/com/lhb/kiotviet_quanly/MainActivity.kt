@@ -12,6 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.lhb.kiotviet_quanly.ui.theme.KiotViet_QuanLyTheme
+import com.lhb.kiotviet_quanly.view.navigation.ScreenNavigation
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -19,7 +20,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             KiotViet_QuanLyTheme {
-
+                ScreenNavigation()
             }
         }
     }
