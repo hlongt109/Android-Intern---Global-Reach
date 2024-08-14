@@ -12,7 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.lhb.kiotviet_quanly.ui.theme.KiotViet_QuanLyTheme
-import com.lhb.kiotviet_quanly.view.navigation.ScreenNavigation
+import com.lhb.kiotviet_quanly.view.navigator.ScreenNavigation
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
