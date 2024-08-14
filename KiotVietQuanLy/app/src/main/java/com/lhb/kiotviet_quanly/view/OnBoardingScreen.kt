@@ -30,12 +30,14 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.lhb.kiotviet_quanly.R
+import com.lhb.kiotviet_quanly.utils.setOnBoardingCompleted
 import com.lhb.kiotviet_quanly.view.component.BottomSheetPhoneNumber
 import com.lhb.kiotviet_quanly.view.component.CustomButtonBlue
 import com.lhb.kiotviet_quanly.view.component.CustomButtonTransparent
@@ -45,9 +47,12 @@ import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalFoundationApi::class, ExperimentalMaterial3Api::class)
 @Composable
-fun OnBoardingScreen(navController: NavController){
+fun OnBoardingScreen(navController: NavController) {
     val pagerState = rememberPagerState(0, 0F) { 5 }
     val scope = rememberCoroutineScope()
+    val context = LocalContext.current
+
+    setOnBoardingCompleted(context)
 
     val sheetState = rememberModalBottomSheetState()
     var showBottomSheet by remember { mutableStateOf(false) }
@@ -79,7 +84,7 @@ fun OnBoardingScreen(navController: NavController){
                     .background(Color.White)
                     .navigationBarsPadding()
             ) {
-                if(pagerState.currentPage == 0){
+                if (pagerState.currentPage == 0) {
                     Column(modifier = Modifier.padding(15.dp)) {
                         CustomButtonTransparent(
                             onClick = {
@@ -91,15 +96,23 @@ fun OnBoardingScreen(navController: NavController){
                         )
                         Spacer(modifier = Modifier.padding(70.dp))
                     }
-                }else{
+                } else {
                     Column(modifier = Modifier.padding(15.dp)) {
                         CustomButtonBlue(
-                            onClick = { navController.navigate("SignUpScreen") },
+                            onClick = {
+                                navController.navigate("SignUpScreen") {
+                                    popUpTo("OnBoardingScreen") { inclusive = true }
+                                }
+                            },
                             title = "Tạo tài khoản miễn phí"
                         )
                         Spacer(modifier = Modifier.padding(5.dp))
                         CustomButtonTransparent(
-                            onClick = { navController.navigate("SignInScreen") },
+                            onClick = {
+                                navController.navigate("SignInScreen"){
+                                    popUpTo("OnBoardingScreen") { inclusive = true }
+                                }
+                            },
                             title = "Đã có tài khoản? Đăng nhập"
                         )
                         Spacer(modifier = Modifier.padding(35.dp))
@@ -111,12 +124,18 @@ fun OnBoardingScreen(navController: NavController){
                         .padding(bottom = 10.dp),
                     horizontalArrangement = Arrangement.Center
                 ) {
-                    CustomTextFontSize16(title = "Tổng đài hỗ trợ", color = Color.Black, onclick = {})
+                    CustomTextFontSize16(
+                        title = "Tổng đài hỗ trợ",
+                        color = Color.Black,
+                        onclick = {})
                     Spacer(modifier = Modifier.padding(5.dp))
-                    CustomTextFontSize16(title = "1900 6522", color = Color(0xff3f86f7), onclick = { showBottomSheet = true })
+                    CustomTextFontSize16(
+                        title = "1900 6522",
+                        color = Color(0xff3f86f7),
+                        onclick = { showBottomSheet = true })
                 }
 
-                if(showBottomSheet){
+                if (showBottomSheet) {
                     ModalBottomSheet(
                         onDismissRequest = { showBottomSheet = false },
                         sheetState = sheetState,
