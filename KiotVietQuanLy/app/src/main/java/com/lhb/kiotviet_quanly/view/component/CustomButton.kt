@@ -73,3 +73,25 @@ fun CustomButtonBlue(
         )
     }
 }
+
+@Composable
+fun CustomBigButton(
+    onClick: () -> Unit = {},
+    title: String
+){
+    Button(
+        onClick = {
+            onClick()
+        },
+        modifier = Modifier.fillMaxWidth(),
+        shape = RoundedCornerShape(12.dp),
+        colors = ButtonDefaults.buttonColors(containerColor = Color(0xff005595)) // Color: 312064
+    ) {
+        Text(
+            text = title,
+            fontSize = 20.sp,
+            fontWeight = FontWeight.SemiBold,
+            modifier = Modifier.padding(vertical = 8.dp)
+        )
+    }
+}

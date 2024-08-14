@@ -5,6 +5,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.lhb.kiotviet_quanly.view.ForgotPassword
 import com.lhb.kiotviet_quanly.view.OnBoardingScreen
 import com.lhb.kiotviet_quanly.view.SignInScreen
 import com.lhb.kiotviet_quanly.view.SignUpScreen
@@ -17,11 +18,12 @@ fun ScreenNavigation(){
 
     NavHost(
         navController = navController,
-        startDestination = "WelcomeScreen"
+        startDestination = "SignInScreen"
     ) {
         composable(ScreenName.OnBoardingScreen.route){ OnBoardingScreen(navController = navController) }
         composable(ScreenName.WelcomeScreen.route){ WelcomeScreen(navController = navController) }
         composable(ScreenName.SignUpScreen.route){ SignUpScreen(navController = navController)}
         composable(ScreenName.SignInScreen.route) { SignInScreen(navController = navController)}
+        composable(ScreenName.ForgotPasswordScreen.route){ ForgotPassword(navController = navController)}
     }
 }

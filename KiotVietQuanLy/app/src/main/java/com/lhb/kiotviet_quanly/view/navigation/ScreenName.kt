@@ -4,5 +4,6 @@ enum class ScreenName(val route: String) {
     OnBoardingScreen("OnBoardingScreen"),
     WelcomeScreen("WelcomeScreen"),
     SignUpScreen("SignUpScreen"),
-    SignInScreen("SignInScreen")
+    SignInScreen("SignInScreen"),
+    ForgotPasswordScreen("ForgotPasswordScreen"),
 }

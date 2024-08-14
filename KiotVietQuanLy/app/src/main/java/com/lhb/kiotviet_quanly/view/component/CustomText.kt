@@ -10,14 +10,45 @@ import androidx.compose.ui.unit.sp
 import com.lhb.kiotviet_quanly.ui.theme.OpenSans
 
 @Composable
-fun CustomTextFontSize16(
+fun CustomTextFontSize(
     title: String,
     color: Color,
+    fontSize: Int = 16
+){
+    Text(
+        text = title,
+        fontSize = fontSize.sp,
+        color = color,
+        fontFamily = OpenSans,
+        fontWeight = FontWeight.Bold,
+    )
+}
+
+@Composable
+fun CustomTextFontSizeMedium(
+    title: String,
+    color: Color,
+    fontSize: Int = 16
+){
+    Text(
+        text = title,
+        fontSize = fontSize.sp,
+        color = color,
+        fontFamily = OpenSans,
+        fontWeight = FontWeight(600),
+    )
+}
+
+@Composable
+fun CustomTextOnClick(
+    title: String,
+    color: Color,
+    fontSize: Int = 16,
     onclick: () -> Unit
 ){
     Text(
         text = title,
-        fontSize = 16.sp,
+        fontSize = fontSize.sp,
         color = color,
         fontFamily = OpenSans,
         fontWeight = FontWeight.Bold,

@@ -41,7 +41,8 @@ import com.lhb.kiotviet_quanly.utils.setOnBoardingCompleted
 import com.lhb.kiotviet_quanly.view.component.BottomSheetPhoneNumber
 import com.lhb.kiotviet_quanly.view.component.CustomButtonBlue
 import com.lhb.kiotviet_quanly.view.component.CustomButtonTransparent
-import com.lhb.kiotviet_quanly.view.component.CustomTextFontSize16
+import com.lhb.kiotviet_quanly.view.component.CustomTextFontSize
+import com.lhb.kiotviet_quanly.view.component.CustomTextOnClick
 import com.lhb.kiotviet_quanly.view.component.PagerScreen
 import kotlinx.coroutines.launch
 
@@ -124,12 +125,11 @@ fun OnBoardingScreen(navController: NavController) {
                         .padding(bottom = 10.dp),
                     horizontalArrangement = Arrangement.Center
                 ) {
-                    CustomTextFontSize16(
+                    CustomTextFontSize(
                         title = "Tổng đài hỗ trợ",
-                        color = Color.Black,
-                        onclick = {})
+                        color = Color.Black,)
                     Spacer(modifier = Modifier.padding(5.dp))
-                    CustomTextFontSize16(
+                    CustomTextOnClick(
                         title = "1900 6522",
                         color = Color(0xff3f86f7),
                         onclick = { showBottomSheet = true })
