@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBackIosNew
 import androidx.compose.material.icons.filled.ArrowDropDown
@@ -57,6 +58,7 @@ fun SignUpScreen(navController: NavController) {
                     .background(Color(0xffffffff))
                     .fillMaxWidth()
                     .padding(20.dp)
+                    .statusBarsPadding()
             ) {
                 Icon(Icons.Default.ArrowBackIosNew, contentDescription = null, modifier = Modifier.size(25.dp).clickable { navController.popBackStack() }, tint = Color(0xff9fa5aa))
                 Spacer(modifier = Modifier.padding(15.dp))
