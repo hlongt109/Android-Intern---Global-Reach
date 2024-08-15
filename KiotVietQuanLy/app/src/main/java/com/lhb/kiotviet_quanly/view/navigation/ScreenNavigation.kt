@@ -18,7 +18,7 @@ fun ScreenNavigation(){
 
     NavHost(
         navController = navController,
-        startDestination = "WelcomeScreen"
+        startDestination = ScreenName.BottomTav.route
     ) {
         composable(ScreenName.OnBoardingScreen.route){ OnBoardingScreen(navController = navController) }
         composable(ScreenName.WelcomeScreen.route){ WelcomeScreen(navController = navController) }

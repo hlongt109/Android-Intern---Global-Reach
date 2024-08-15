@@ -19,6 +19,8 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.BarChart
+import androidx.compose.material.icons.filled.OpenInFull
 import androidx.compose.material.icons.outlined.AttachMoney
 import androidx.compose.material.icons.outlined.Money
 import androidx.compose.material.icons.outlined.Visibility
@@ -35,6 +37,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
@@ -69,7 +72,9 @@ fun OverViewManagerScreen(navController: NavController){
                 .fillMaxSize()
                 .padding(paddingValues)
         ) {
-            LazyColumn {
+            LazyColumn(
+                modifier = Modifier.fillMaxSize()
+            ) {
                 item {
                     Column(
                         modifier = Modifier
@@ -184,12 +189,158 @@ fun OverViewManagerScreen(navController: NavController){
                             }
                         }
                         Row(
-                            modifier = Modifier.fillMaxWidth().padding(top = 20.dp, start = 20.dp, end = 20.dp, bottom = 10.dp),
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(top = 20.dp, start = 20.dp, end = 20.dp, bottom = 10.dp),
                             horizontalArrangement = Arrangement.SpaceAround
                         ) {
                             ItemOverView(iconName = painterResource(id = R.drawable.money_bag), title = "Vay vốn",26, onCLick = {})
                             ItemOverView(iconName = painterResource(id = R.drawable.icon_delivery), title = "Giao hàng",26,onCLick = {})
                             ItemOverView(iconName = painterResource(id = R.drawable.icon_cart), title = "Nguồn hàng sỉ",26,onCLick = {})
+                        }
+                    }
+                }
+                item {
+                    Column(
+                        modifier = Modifier
+                            .padding(top = 15.dp)
+                            .fillMaxWidth()
+                            .background(Color.White)
+                            .padding(15.dp)
+                    ) {
+                        Text(text = "Doanh thu", fontSize = 18.sp, color = Color(0xff303030), fontWeight = FontWeight.Bold)
+                        Row (
+                            verticalAlignment = Alignment.CenterVertically,
+                            modifier = Modifier.padding(top = 15.dp)
+                        ){
+                          IconButton(onClick = { /*TODO*/ }) {
+                              Icon(Icons.Default.BarChart, contentDescription = "", tint = Color(0xff0066CC),
+                                  modifier = Modifier
+                                      .clip(RoundedCornerShape(20.dp))
+                                      .background(Color(0xff0066CC).copy(alpha = 0.3f))
+                                      .padding(5.dp)
+                              )
+                          }
+                            Spacer(modifier = Modifier.width(20.dp))
+                            IconButton(onClick = { /*TODO*/ }) {
+                                Icon(Icons.Default.OpenInFull, contentDescription = "", tint = Color(0xff303030),)
+                            }
+                        }
+                        Column(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .background(Color.White)
+                                .height(300.dp),
+                            verticalArrangement = Arrangement.Center,
+                            horizontalAlignment = Alignment.CenterHorizontally
+                        ) {
+                            Box(
+                                modifier = Modifier
+                                    .clip(RoundedCornerShape(50.dp))
+                                    .background(Color(0xff0066CC).copy(alpha = 0.1f))
+                                    .padding(15.dp),
+                                contentAlignment = Alignment.Center
+                            ){
+                                Icon(painter = painterResource(id = R.drawable.graph), contentDescription = "", tint = Color(0xff0066CC),
+                                    modifier = Modifier
+                                        .size(80.dp)
+                                        .clip(RoundedCornerShape(40.dp))
+                                        .background(Color(0xff0066CC).copy(alpha = 0.2f))
+                                        .padding(15.dp)
+                                )
+                            }
+                            Spacer(modifier = Modifier.height(20.dp))
+                            Text(text = "Bạn chưa bán đơn nào", fontSize = 16.sp, color = Color(0xffb6b6b6), fontWeight = FontWeight.Normal)
+                        }
+                    }
+                }
+                item {
+                    Row(
+                        modifier = Modifier
+                            .padding(top = 15.dp)
+                            .fillMaxWidth()
+                            .background(Color.White)
+                            .padding(15.dp),
+                        horizontalArrangement = Arrangement.SpaceBetween
+                    ) {
+                        Text(text = "Tồn kho", fontSize = 18.sp, color = Color(0xff303030), fontWeight = FontWeight.Bold)
+                        Column(
+                            horizontalAlignment = Alignment.End
+                        ) {
+                            Text(text = "27,600,000", fontSize = 16.sp, color = Color(0xff303030), fontWeight = FontWeight.Medium)
+                            Text(text = "184 sản phẩm", fontSize = 14.sp, color = Color(0xff303030), fontWeight = FontWeight.Normal)
+                        }
+                    }
+                }
+                item {
+                    Column(
+                        modifier = Modifier
+                            .padding(top = 15.dp)
+                            .fillMaxWidth()
+                            .background(Color.White)
+                            .padding(15.dp),
+                    ) {
+                        Row(
+                            modifier = Modifier.fillMaxWidth().background(Color.White),
+                            horizontalArrangement = Arrangement.SpaceBetween
+                        ) {
+                            Text(text = "Thu", fontSize = 18.sp, color = Color(0xff303030), fontWeight = FontWeight.Bold)
+                            Column(
+                                horizontalAlignment = Alignment.End
+                            ) {
+                                Text(text = "0", fontSize = 16.sp, color = Color(0xff303030), fontWeight = FontWeight.Medium)
+                                Text(text = "phiếu", fontSize = 14.sp, color = Color(0xff303030), fontWeight = FontWeight.Normal)
+                            }
+                        }
+                        Divider(color = Color.LightGray, thickness = 0.5.dp, modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp))
+                        Row(
+                            modifier = Modifier.fillMaxWidth().background(Color.White),
+                            horizontalArrangement = Arrangement.SpaceBetween
+                        ) {
+                            Text(text = "Chi", fontSize = 18.sp, color = Color(0xff303030), fontWeight = FontWeight.Bold)
+                            Column(
+                                horizontalAlignment = Alignment.End
+                            ) {
+                                Text(text = "0", fontSize = 16.sp, color = Color(0xff303030), fontWeight = FontWeight.Medium)
+                                Text(text = "phiếu", fontSize = 14.sp, color = Color(0xff303030), fontWeight = FontWeight.Normal)
+                            }
+                        }
+                    }
+                }
+                item {
+                    Column(
+                        modifier = Modifier
+                            .padding(top = 15.dp)
+                            .fillMaxWidth()
+                            .background(Color.White)
+                            .padding(15.dp)
+                    ) {
+                        Text(text = "Hàng bán chạy", fontSize = 18.sp, color = Color(0xff303030), fontWeight = FontWeight.Bold)
+                        Column(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .background(Color.White)
+                                .height(300.dp),
+                            verticalArrangement = Arrangement.Center,
+                            horizontalAlignment = Alignment.CenterHorizontally
+                        ) {
+                            Box(
+                                modifier = Modifier
+                                    .clip(RoundedCornerShape(50.dp))
+                                    .background(Color(0xff0066CC).copy(alpha = 0.1f))
+                                    .padding(15.dp),
+                                contentAlignment = Alignment.Center
+                            ){
+                                Icon(painter = painterResource(id = R.drawable.product), contentDescription = "", tint = Color(0xff0066CC),
+                                    modifier = Modifier
+                                        .size(80.dp)
+                                        .clip(RoundedCornerShape(40.dp))
+                                        .background(Color(0xff0066CC).copy(alpha = 0.2f))
+                                        .padding(15.dp)
+                                )
+                            }
+                            Spacer(modifier = Modifier.height(20.dp))
+                            Text(text = "Bạn chưa bán hàng", fontSize = 16.sp, color = Color(0xffb6b6b6), fontWeight = FontWeight.Normal)
                         }
                     }
                 }
