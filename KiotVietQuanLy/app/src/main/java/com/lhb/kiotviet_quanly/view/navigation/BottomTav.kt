@@ -28,6 +28,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
@@ -46,6 +47,13 @@ import com.lhb.kiotviet_quanly.view.SellManagerScreen
 fun BottomTav(navController: NavController){
     val navigationController = rememberNavController()
     val selected = remember { mutableStateOf(Icons.Outlined.InsertChartOutlined) }
+
+    fun navigateToScreen(icon: ImageVector, screen: String) {
+        selected.value = icon
+        navigationController.navigate(screen) {
+            popUpTo(0)
+        }
+    }
 
     Scaffold(
         bottomBar = {
@@ -105,10 +113,11 @@ fun BottomTav(navController: NavController){
                     ) {
                         IconButton(
                             onClick = {
-                                selected.value = Icons.Outlined.ShoppingBag
-                                navigationController.navigate(BottomBarScreens.SellManager.screen) {
-                                    popUpTo(0)
-                                }
+//                                selected.value = Icons.Outlined.ShoppingBag
+//                                navigationController.navigate(BottomBarScreens.SellManager.screen) {
+//                                    popUpTo(0)
+//                                }
+                                navigateToScreen(Icons.Outlined.ShoppingBag, BottomBarScreens.SellManager.screen)
                             },
                             modifier = Modifier
                                 .fillMaxSize()
@@ -181,7 +190,7 @@ fun BottomTav(navController: NavController){
                 end = paddingValues.calculateEndPadding(LayoutDirection.Ltr))
         ){
             composable(BottomBarScreens.OverViewManager.screen){ OverViewManagerScreen(navController)}
-            composable(BottomBarScreens.BillManager.screen){ BillManagerScreen(navController)}
+            composable(BottomBarScreens.BillManager.screen){ BillManagerScreen(navController, ::navigateToScreen)}
             composable(BottomBarScreens.SellManager.screen){ SellManagerScreen(navController)}
             composable(BottomBarScreens.ProductManager.screen){ ProductManagerScreen(navController)}
             composable(BottomBarScreens.OtherManager.screen){ OtherManagerScreen(navController)}

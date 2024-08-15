@@ -12,6 +12,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.outlined.ShoppingBag
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
@@ -19,15 +20,18 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.lhb.kiotviet_quanly.model.Bill
 import com.lhb.kiotviet_quanly.view.component.ItemBill
 import com.lhb.kiotviet_quanly.view.components.TopBarBill
 import com.lhb.kiotviet_quanly.view.components.TopBarOverView
+import com.lhb.kiotviet_quanly.view.navigation.BottomBarScreens
+import com.lhb.kiotviet_quanly.view.navigation.ScreenName
 
 @Composable
-fun BillManagerScreen(navController: NavController){
+fun BillManagerScreen(navController: NavController,navigateToScreen: (ImageVector, String) -> Unit){
     val fakeBill = listOf(
         Bill("b1","Trần Hoàng Long","Thứ Hai, 05/08/2024","HD0004","Thắt lưng nam Hermes",18,10465000, "Tiền mặt"),
         Bill("b2","Long - Hà Nội","Thứ Ba, 06/08/2024","HD0006","Thắt lưng nam LV xanh",13,1495000, "Tiền mặt"),
@@ -50,7 +54,7 @@ fun BillManagerScreen(navController: NavController){
         },
         floatingActionButton = {
             IconButton(
-                onClick = { /*TODO*/ },
+                onClick = { navigateToScreen(Icons.Outlined.ShoppingBag, BottomBarScreens.SellManager.screen) },
                 modifier = Modifier
                     .padding(bottom = 70.dp)
                     .clip(RoundedCornerShape(30.dp))
