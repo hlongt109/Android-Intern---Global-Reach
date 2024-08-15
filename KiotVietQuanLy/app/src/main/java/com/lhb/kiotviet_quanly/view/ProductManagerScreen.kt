@@ -52,7 +52,7 @@ fun ProductManagerScreen(navController: NavController) {
                 .fillMaxSize()
                 .padding(innerPadding)
         ) {
-
+            
         }
     }
 }
