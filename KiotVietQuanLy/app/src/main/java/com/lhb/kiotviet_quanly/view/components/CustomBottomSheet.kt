@@ -1,4 +1,4 @@
-package com.lhb.kiotviet_quanly.view.component
+package com.lhb.kiotviet_quanly.view.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement

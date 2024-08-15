@@ -1,4 +1,4 @@
-package com.lhb.kiotviet_quanly.view.component
+package com.lhb.kiotviet_quanly.view.components
 
 import androidx.compose.foundation.clickable
 import androidx.compose.material3.Text

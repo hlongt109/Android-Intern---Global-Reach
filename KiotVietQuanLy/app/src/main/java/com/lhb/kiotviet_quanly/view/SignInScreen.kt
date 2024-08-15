@@ -44,14 +44,14 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.lhb.kiotviet_quanly.R
 import com.lhb.kiotviet_quanly.ui.theme.OpenSans
-import com.lhb.kiotviet_quanly.view.component.BottomSheetPhoneNumber
-import com.lhb.kiotviet_quanly.view.component.CustomBigButton
-import com.lhb.kiotviet_quanly.view.component.CustomOutlinedTextField
-import com.lhb.kiotviet_quanly.view.component.CustomOutlinedTextField1
-import com.lhb.kiotviet_quanly.view.component.CustomOutlinedTextFieldPassword
-import com.lhb.kiotviet_quanly.view.component.CustomTextFontSize
-import com.lhb.kiotviet_quanly.view.component.CustomTextFontSizeMedium
-import com.lhb.kiotviet_quanly.view.component.CustomTextOnClick
+import com.lhb.kiotviet_quanly.view.components.BottomSheetPhoneNumber
+import com.lhb.kiotviet_quanly.view.components.CustomBigButton
+import com.lhb.kiotviet_quanly.view.components.CustomOutlinedTextField
+import com.lhb.kiotviet_quanly.view.components.CustomOutlinedTextField1
+import com.lhb.kiotviet_quanly.view.components.CustomOutlinedTextFieldPassword
+import com.lhb.kiotviet_quanly.view.components.CustomTextFontSize
+import com.lhb.kiotviet_quanly.view.components.CustomTextFontSizeMedium
+import com.lhb.kiotviet_quanly.view.components.CustomTextOnClick
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
