@@ -1,6 +1,5 @@
 package com.lhb.kiotviet_quanly.view
 
-import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -18,7 +17,6 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ModalBottomSheet
-import androidx.compose.material3.ModalDrawerSheet
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
@@ -38,12 +36,12 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.lhb.kiotviet_quanly.R
 import com.lhb.kiotviet_quanly.utils.setOnBoardingCompleted
-import com.lhb.kiotviet_quanly.view.component.BottomSheetPhoneNumber
-import com.lhb.kiotviet_quanly.view.component.CustomButtonBlue
-import com.lhb.kiotviet_quanly.view.component.CustomButtonTransparent
-import com.lhb.kiotviet_quanly.view.component.CustomTextFontSize
-import com.lhb.kiotviet_quanly.view.component.CustomTextOnClick
-import com.lhb.kiotviet_quanly.view.component.PagerScreen
+import com.lhb.kiotviet_quanly.view.components.BottomSheetPhoneNumber
+import com.lhb.kiotviet_quanly.view.components.CustomButtonBlue
+import com.lhb.kiotviet_quanly.view.components.CustomButtonTransparent
+import com.lhb.kiotviet_quanly.view.components.CustomTextFontSize
+import com.lhb.kiotviet_quanly.view.components.CustomTextOnClick
+import com.lhb.kiotviet_quanly.view.components.PagerScreen
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalFoundationApi::class, ExperimentalMaterial3Api::class)

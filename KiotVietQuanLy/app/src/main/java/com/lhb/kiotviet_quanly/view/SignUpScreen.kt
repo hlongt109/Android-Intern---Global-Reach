@@ -19,10 +19,8 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -34,9 +32,9 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.lhb.kiotviet_quanly.R
-import com.lhb.kiotviet_quanly.view.component.CustomBigButton
-import com.lhb.kiotviet_quanly.view.component.CustomOutlinedTextField
-import com.lhb.kiotviet_quanly.view.component.CustomTextFontSizeMedium
+import com.lhb.kiotviet_quanly.view.components.CustomBigButton
+import com.lhb.kiotviet_quanly.view.components.CustomOutlinedTextField
+import com.lhb.kiotviet_quanly.view.components.CustomTextFontSizeMedium
 
 @Composable
 fun SignUpScreen(navController: NavController) {
