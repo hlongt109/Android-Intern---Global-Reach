@@ -153,7 +153,7 @@ fun SignInScreen(navController: NavController){
                 Spacer(modifier = Modifier.padding(10.dp))
                 Text(text = "Quên mât khẩu ?", fontSize = 16.sp, color = Color(0xFF2880c6), fontFamily = OpenSans, fontWeight = FontWeight(600), textAlign = TextAlign.End, modifier = Modifier.fillMaxWidth().clickable { navController.navigate("ForgotPasswordScreen") })
                 Spacer(modifier = Modifier.padding(10.dp))
-                CustomBigButton(title = "Đăng nhập")
+                CustomBigButton(title = "Đăng nhập", onClick = { navController.navigate("bottomTav") })
                 Spacer(modifier = Modifier.padding(10.dp))
                 Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center) {
                     Spacer(modifier = Modifier.width(10.dp))
