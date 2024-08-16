@@ -43,9 +43,9 @@ fun OtherManagerScreen(navController: NavController) {
             item {
                 Content1()
 
-                ContentTransaction()
+                ContentTransaction(navController)
 
-                ContentGoods()
+                ContentGoods(navController)
 
                 ContentSellOnline()
 

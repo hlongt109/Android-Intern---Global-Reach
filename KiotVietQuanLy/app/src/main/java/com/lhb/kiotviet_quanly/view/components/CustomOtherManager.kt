@@ -2,6 +2,7 @@ package com.lhb.kiotviet_quanly.view.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -36,6 +37,7 @@ import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import com.lhb.kiotviet_quanly.R
 
 @Composable
@@ -119,7 +121,7 @@ fun Content1(){
 }
 
 @Composable
-fun ContentTransaction(){
+fun ContentTransaction(navController: NavController){
     Spacer(modifier = Modifier.padding(10.dp))
     Column(
         modifier = Modifier
@@ -138,7 +140,7 @@ fun ContentTransaction(){
                 title2 = "Đặt hàng",
                 color = Color.Black,
                 onClick1 = { /*TODO*/ },
-                onClick2 = { /*TODO*/ }
+                onClick2 = { navController.navigate("OrderScreen") }
             )
             Spacer(modifier = Modifier.weight(1f))
             CustomContentIcon(
@@ -147,7 +149,7 @@ fun ContentTransaction(){
                 painter2 = painterResource(id = R.drawable.icon_4),
                 title2 = "Sổ quỹ",
                 color = Color.Black,
-                onClick1 = { /*TODO*/ },
+                onClick1 = { navController.navigate("ReturnGoodsScreen") },
                 onClick2 = { /*TODO*/ }
             )
         }
@@ -155,7 +157,7 @@ fun ContentTransaction(){
 }
 
 @Composable
-fun ContentGoods(){
+fun ContentGoods(navController: NavController){
     Spacer(modifier = Modifier.padding(10.dp))
     Column(
         modifier = Modifier
@@ -188,9 +190,9 @@ fun ContentGoods(){
                 painter3 = painterResource(id = R.drawable.icon_10),
                 title3 = "Xuất hủy",
                 color = Color.Black,
-                onClick1 = { /*TODO*/ },
-                onClick2 = { /*TODO*/ },
-                onClick3 = { /*TODO*/ },
+                onClick1 = { navController.navigate("CheckInventoryScreen") },
+                onClick2 = { navController.navigate("ReturnImportedGoodsScreen") },
+                onClick3 = { navController.navigate("CancelExportScreen") },
             )
         }
     }
@@ -534,7 +536,7 @@ fun CustomContentIcon(
     onClick2: () -> Unit,
 ){
     Column {
-        Row(verticalAlignment = Alignment.CenterVertically) {
+        Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.clickable { onClick1() }) {
             painter1?.let {
                 Image(painter = it, contentDescription = "", modifier = Modifier.size(30.dp))
             }
@@ -543,7 +545,7 @@ fun CustomContentIcon(
         }
         if (painter2 != null && title2.isNotEmpty()) {
             Spacer(modifier = Modifier.padding(10.dp))
-            Row(verticalAlignment = Alignment.CenterVertically) {
+            Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.clickable { onClick2() }) {
                 Image(painter = painter2, contentDescription = "", modifier = Modifier.size(30.dp))
                 Spacer(modifier = Modifier.padding(10.dp))
                 CustomTextFontSize(title = title2, color = color, fontSize = fontSize)
@@ -568,19 +570,19 @@ fun CustomContent3Icon(
     onClick3: () -> Unit,
 ){
     Column{
-        Row(verticalAlignment = Alignment.CenterVertically) {
+        Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.clickable { onClick1() }) {
             Image(painter = painter1, contentDescription = "", modifier = Modifier.size(30.dp))
             Spacer(modifier = Modifier.padding(10.dp))
             CustomTextFontSize(title = title1, color = color, fontSize = 20)
         }
         Spacer(modifier = Modifier.padding(10.dp))
-        Row(verticalAlignment = Alignment.CenterVertically) {
+        Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.clickable { onClick2() }) {
             Image(painter = painter2, contentDescription = "", modifier = Modifier.size(30.dp))
             Spacer(modifier = Modifier.padding(10.dp))
             CustomTextFontSize(title = title2, color = color, fontSize = 20)
         }
         Spacer(modifier = Modifier.padding(10.dp))
-        Row(verticalAlignment = Alignment.CenterVertically) {
+        Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.clickable { onClick3() }) {
             Image(painter = painter3, contentDescription = "", modifier = Modifier.size(30.dp))
             Spacer(modifier = Modifier.padding(10.dp))
             CustomTextFontSize(title = title3, color = color, fontSize = 20)

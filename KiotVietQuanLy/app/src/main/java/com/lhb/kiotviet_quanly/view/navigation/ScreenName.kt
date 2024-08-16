@@ -7,10 +7,9 @@ enum class ScreenName(val route: String) {
     SignInScreen("SignInScreen"),
     BottomTav("bottomTav"),
     ForgotPasswordScreen("ForgotPasswordScreen"),
-    OverViewManagerScreen("overViewScreen"),
-    BillManagerScreen("billScreen"),
-    SellManagerScreen("SellManagerScreen"),
-    ProductManagerScreen("productManagerScreen"),
-    OtherManagerScreen("otherManagerScreen"),
-
+    CancelExportScreen("CancelExportScreen"),
+    CheckInventoryScreen("CheckInventoryScreen"),
+    OrderScreen("OrderScreen"),
+    ReturnGoodsScreen("ReturnGoodsScreen"),
+    ReturnImportedGoodsScreen("ReturnImportedGoodsScreen"),
 }
