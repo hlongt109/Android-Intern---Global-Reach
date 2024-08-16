@@ -50,7 +50,10 @@ fun TopBarAll(
     title: String
 ){
     Column(
-        modifier = Modifier.fillMaxWidth().background(Color(0xffF0F0F0)).statusBarsPadding()
+        modifier = Modifier
+            .fillMaxWidth()
+            .background(Color(0xffF0F0F0))
+            .statusBarsPadding()
     ) {
         Column(
             modifier = Modifier
@@ -63,10 +66,13 @@ fun TopBarAll(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
-                IconButton(onClick = { onClickToBack() }) {
-                    Icon(Icons.Outlined.ArrowBackIosNew, contentDescription = "", tint = Color(0xff7d7f88), modifier = Modifier.size(24.dp))
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    IconButton(onClick = { onClickToBack() }) {
+                        Icon(Icons.Outlined.ArrowBackIosNew, contentDescription = "", tint = Color(0xff7d7f88), modifier = Modifier.size(24.dp))
+                    }
+                    Text(text = title, fontSize = 28.sp, color = Color(0xff303030), fontWeight = FontWeight.Bold)
                 }
-                Text(text = title, fontSize = 28.sp, color = Color(0xff303030), fontWeight = FontWeight.Bold)
+
                 Row {
                     IconButton(onClick = { onClickToSearch() }) {
                         Icon(Icons.Outlined.Search, contentDescription = "", tint = Color(0xff7d7f88), modifier = Modifier.size(24.dp))
