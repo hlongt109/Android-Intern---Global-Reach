@@ -33,7 +33,7 @@ fun ToggleBottom(
             .clip(RoundedCornerShape(20.dp))
             .background(Color(0xffffffff))
             .padding(2.dp)
-            .height(41.dp),
+            .height(40.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
         ToggleOption(
@@ -62,7 +62,7 @@ fun ToggleOption(
         modifier = Modifier
             .width(100.dp)
             .height(37.dp)
-            .clip(RoundedCornerShape(20.dp))
+            .clip(RoundedCornerShape(16.dp))
             .background(if (isSelected) Color(0xff005595) else Color.Transparent)
             .clickable { onClick() },
         contentAlignment = Alignment.Center
