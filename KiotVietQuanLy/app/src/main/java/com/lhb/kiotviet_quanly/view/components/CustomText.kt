@@ -13,7 +13,8 @@ import com.lhb.kiotviet_quanly.ui.theme.OpenSans
 fun CustomTextFontSize(
     title: String,
     color: Color,
-    fontSize: Int = 16
+    fontSize: Int = 16,
+    modifier: Modifier = Modifier
 ){
     Text(
         text = title,
@@ -21,6 +22,7 @@ fun CustomTextFontSize(
         color = color,
         fontFamily = OpenSans,
         fontWeight = FontWeight.Bold,
+        modifier = modifier
     )
 }
 
