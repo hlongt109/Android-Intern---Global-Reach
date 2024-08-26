@@ -1,4 +1,4 @@
-package com.lhb.kiotviett.View
+package com.lhb.kiotviet_quanly.view
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -12,19 +12,12 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.text.BasicTextField
-import androidx.compose.foundation.text.KeyboardActions
-import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.Divider
-import androidx.compose.material.IconButton
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Clear
-import androidx.compose.material.icons.outlined.Close
 import androidx.compose.material.icons.outlined.Edit
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
@@ -38,34 +31,26 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.SolidColor
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.input.PasswordVisualTransformation
-import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.core.graphics.toColorInt
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import com.lhb.kiotviett.View.component.ButtonChoosePaymentMethod
-import com.lhb.kiotviett.View.component.CustomBigButton
-import com.lhb.kiotviett.View.component.CustomOutlinedTextField1
-import com.lhb.kiotviett.View.component.DialogNotification
-import com.lhb.kiotviett.View.component.ToggleBottom
-import com.lhb.kiotviett.View.component.TopBarOrderSummary
-import com.lhb.kiotviett.View.component.TopBarPayment
-import com.lhb.kiotviett.View.navigator.ScreenNames
-import com.lhb.kiotviett.View.navigator.ScreenNavigation
+import com.lhb.kiotviet_quanly.utils.formatCurrency
+import com.lhb.kiotviet_quanly.view.components.ButtonChoosePaymentMethod
+import com.lhb.kiotviet_quanly.view.components.CustomBigButton
+import com.lhb.kiotviet_quanly.view.components.CustomOutlinedTextField1
+import com.lhb.kiotviet_quanly.view.components.DialogNotification
+import com.lhb.kiotviet_quanly.view.components.ToggleBottom
+import com.lhb.kiotviet_quanly.view.components.TopBarPayment
 
 @Composable
 fun PaymentScreen(
+    navController: NavController,
     totalAmount: Int,
-    totalProduct: Int,
-    navController: NavController
+    totalQuantity: Int
 ) {
     var discount by remember { mutableStateOf("") }
     var showDialogConfirm by remember { mutableStateOf(false) }
@@ -133,7 +118,7 @@ fun PaymentScreen(
                                 )
                                 Spacer(modifier = Modifier.width(10.dp))
                                 Text(
-                                    text = totalProduct.toString(),
+                                    text = totalQuantity.toString(),
                                     fontSize = 16.sp,
                                     fontWeight = FontWeight.Normal,
                                     color = Color(0xff303030),
@@ -149,7 +134,7 @@ fun PaymentScreen(
                                 )
                             }
                             Text(
-                                text = totalAmount.toString(),
+                                text = formatCurrency(totalAmount),
                                 fontSize = 18.sp,
                                 fontWeight = FontWeight.Normal
                             )
@@ -167,7 +152,7 @@ fun PaymentScreen(
                             verticalAlignment = Alignment.CenterVertically,
                             horizontalArrangement = Arrangement.SpaceBetween
                         ) {
-                            Row {
+                            Row(modifier = Modifier.height(35.dp), verticalAlignment = Alignment.CenterVertically) {
                                 Text(
                                     text = "Giảm giá",
                                     fontSize = 18.sp,
@@ -182,13 +167,7 @@ fun PaymentScreen(
                             }
 
                             Row {
-                                ToggleBottom()
                                 Spacer(modifier = Modifier.width(5.dp))
-                                CustomOutlinedTextField1(
-                                    value = discount,
-                                    onValueChange = { discount = it },
-                                    modifier = Modifier
-                                )
                             }
                         }
                         Divider(
@@ -205,13 +184,13 @@ fun PaymentScreen(
                             horizontalArrangement = Arrangement.SpaceBetween
                         ) {
                             Text(
-                                text = "Khác cần trả",
+                                text = "Khách cần trả",
                                 fontSize = 18.sp,
                                 fontWeight = FontWeight.Normal,
                                 color = Color(0xff303030),
                             )
                             Text(
-                                text = totalAmount.toString(),
+                                text = formatCurrency(totalAmount),
                                 fontSize = 18.sp,
                                 fontWeight = FontWeight.Medium,
                                 color = Color(0xff005595)
@@ -243,7 +222,7 @@ fun PaymentScreen(
                                 .padding(horizontal = 10.dp, vertical = 20.dp),
                         ) {
                             ButtonChoosePaymentMethod(onClick = {
-                                navController.navigate("${ScreenNames.PaymentMethodScreen.route}/${totalAmount}")
+                                navController.navigate("")
                             })
                             Spacer(modifier = Modifier.height(20.dp))
                             Text(text = "Tiền khách trả",
@@ -251,7 +230,7 @@ fun PaymentScreen(
                                 fontWeight = FontWeight.Normal,
                                 fontSize = 17.sp
                             )
-                            Text(text = totalAmount.toString(),
+                            Text(text = formatCurrency(totalAmount),
                                 color = Color(0xff303030),
                                 fontWeight = FontWeight.Bold,
                                 fontSize = 18.sp,
@@ -295,7 +274,7 @@ fun PaymentScreen(
                         )
                     }
                 }
-                item { 
+                item {
                     Box(modifier = Modifier.height(150.dp))
                 }
             }
@@ -311,10 +290,4 @@ fun PaymentScreen(
             }
         )
     }
-}
-
-@Composable
-@Preview
-fun PreviewProductOrderDetailScreen(){
-    PaymentScreen(totalAmount = 2, totalProduct = 2, navController = rememberNavController())
 }

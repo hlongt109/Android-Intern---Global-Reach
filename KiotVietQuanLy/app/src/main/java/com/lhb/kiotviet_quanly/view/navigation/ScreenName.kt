@@ -20,5 +20,8 @@ enum class ScreenName(val route: String) {
     NewAddressScreen("NewAddressScreen"),
     AddDescription("AddDescription"),
     WarehouseCardScreen("WarehouseCardScreen"),
-    InventoryLevels("InventoryLevels")
+    InventoryLevels("InventoryLevels"),
+    OrderDetailScreen("OrderDetailScreen"),
+    ProductOrderDetailScreen("ProductOrderDetailScreen"),
+    RetailCustomersScreen("RetailCustomersScreen")
 }

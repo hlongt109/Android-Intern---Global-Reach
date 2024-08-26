@@ -12,12 +12,13 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Divider
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Add
+import androidx.compose.material.icons.outlined.ArrowForwardIos
 import androidx.compose.material.icons.outlined.Assignment
-import androidx.compose.material.icons.outlined.CloseFullscreen
+import androidx.compose.material.icons.outlined.Cancel
 import androidx.compose.material.icons.outlined.Person
-import androidx.compose.material.icons.outlined.QrCode2
 import androidx.compose.material.icons.outlined.Search
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -37,13 +38,17 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.lhb.kiotviet_quanly.R
+import com.lhb.kiotviet_quanly.model.RetailCustomer
+
 
 @Composable
-fun TopBarSell(
-    title: String,
+fun TopBarOrderDetail(
     onClickToQR: () -> Unit,
-    onClickToAdd: () -> Unit
+    onClickToAdd: () -> Unit,
+    clickRetailCustomer: () -> Unit,
+    navController: NavController
 ){
     var searchQuery by remember { mutableStateOf("") }
 
@@ -64,8 +69,11 @@ fun TopBarSell(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
-                Text(text = title, fontSize = 28.sp, color = Color(0xff303030), fontWeight = FontWeight.Bold)
-                IconButton(onClick = { }) { Icon(Icons.Outlined.Assignment, contentDescription = "", tint = Color(0xff303030), modifier = Modifier.size(24.dp)) }
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    IconButton(onClick = { navController.popBackStack() }) { Icon(Icons.Outlined.Cancel, contentDescription = "", tint = Color(0xff69717c), modifier = Modifier.size(24.dp)) }
+                    Text(text = "Bán hàng", fontSize = 24.sp, color = Color(0xff303030), fontWeight = FontWeight.Bold)
+                }
+                IconButton(onClick = {  }) { Icon(Icons.Outlined.Assignment, contentDescription = "", tint = Color(0xff69717c), modifier = Modifier.size(24.dp)) }
             }
             Spacer(modifier = Modifier.height(10.dp))
             Row(
@@ -109,35 +117,37 @@ fun TopBarSell(
                 }
             }
             //
-            Row(
+            Column(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(top = 10.dp),
-                verticalAlignment = Alignment.CenterVertically,
             ) {
                 Row(
+                    modifier = Modifier.height(40.dp).clickable { clickRetailCustomer() },
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    Icon(Icons.Outlined.Person, contentDescription = "", tint = Color(0xff404040), modifier = Modifier.size(16.dp))
-                    Text(text = "Khách lẻ", color = Color(0xff404040), fontSize = 12.sp, modifier = Modifier.padding(horizontal = 10.dp))
+                    Row {
+                        Icon(Icons.Outlined.Person, contentDescription = "", tint = Color(0xff404040), modifier = Modifier.size(20.dp))
+                        Text(text = "Khách lẻ", color = Color(0xff404040), fontSize = 16.sp, modifier = Modifier.padding(horizontal = 10.dp), fontWeight = FontWeight.Bold)
+                    }
+                    Spacer(modifier = Modifier.weight(1f))
+                    Icon(Icons.Outlined.ArrowForwardIos, contentDescription = "", tint = Color(0xff404040), modifier = Modifier.size(16.dp))
                 }
+                Spacer(modifier = Modifier.padding(5.dp))
+                Divider()
+                Spacer(modifier = Modifier.padding(5.dp))
                 Row(
-                    modifier = Modifier.padding(start = 15.dp),
+                    modifier = Modifier.height(40.dp),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    Icon(painter = painterResource(id = R.drawable.price), contentDescription = "", tint = Color(0xff303030), modifier = Modifier.size(15.dp))
-                    Text(text = "Bảng giá chung", color = Color(0xff404040), fontSize = 12.sp, modifier = Modifier.padding(horizontal = 10.dp))
+                    Row {
+                        Icon(painter = painterResource(id = R.drawable.price), contentDescription = "", tint = Color(0xff303030), modifier = Modifier.size(17.dp))
+                        Text(text = "Bảng giá chung", color = Color(0xff404040), fontSize = 16.sp, modifier = Modifier.padding(horizontal = 12.dp), fontWeight = FontWeight.Bold)
+                    }
+                    Spacer(modifier = Modifier.weight(1f))
+                    Icon(Icons.Outlined.ArrowForwardIos, contentDescription = "", tint = Color(0xff404040), modifier = Modifier.size(16.dp))
                 }
             }
         }
     }
-}
-@Preview
-@Composable
-fun PreviewTopBarSell(){
-    TopBarSell(
-        title = "Đặt hàng",
-        onClickToQR = { /*TODO*/ },
-        onClickToAdd = {}
-    )
 }

@@ -1,6 +1,7 @@
 package com.lhb.kiotviet_quanly.view.components
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -28,10 +29,12 @@ import androidx.core.graphics.toColorInt
 import coil.compose.AsyncImage
 import com.lhb.kiotviet_quanly.R
 import com.lhb.kiotviet_quanly.model.Product
+import com.lhb.kiotviet_quanly.utils.formatCurrency
 
 @Composable
 fun ItemProduct2(
-    product: Product
+    product: Product,
+    onClickItem: () -> Unit
 ){
     Card(
         colors = CardDefaults.cardColors(
@@ -40,7 +43,8 @@ fun ItemProduct2(
         ),
         modifier = Modifier
             .fillMaxWidth()
-            .height(120.dp)
+            .height(100.dp)
+            .clickable { onClickItem() }
     ) {
         Row(
             modifier = Modifier
@@ -82,7 +86,7 @@ fun ItemProduct2(
                 horizontalAlignment = Alignment.End
             ) {
                 Text(
-                    text = product.price.toString(),
+                    text = formatCurrency(product.price),
                     color = Color(0xff4169E1),
                     fontSize = 16.sp,
                     fontWeight = FontWeight.SemiBold
@@ -96,10 +100,4 @@ fun ItemProduct2(
             }
         }
     }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun PreviewItemProduct2() {
-    ItemProduct2(product = Product("PR03", "Giày nam nữ Nice", 200000, ""))
 }
