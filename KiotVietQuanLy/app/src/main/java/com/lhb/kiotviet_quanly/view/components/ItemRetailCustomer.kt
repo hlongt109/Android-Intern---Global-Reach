@@ -39,7 +39,7 @@ fun ItemRetailCustomer(
         verticalAlignment = Alignment.CenterVertically
     ) {
         AsyncImage(
-            model = retailCustomer.image,
+            model = retailCustomer.imageUrl,
             contentDescription = null,
             placeholder = painterResource(R.drawable.ic_launcher_foreground),
             error = painterResource(R.drawable.ic_launcher_foreground),
@@ -52,9 +52,9 @@ fun ItemRetailCustomer(
         )
         Spacer(modifier = Modifier.padding(5.dp))
         Column {
-            Text(text = retailCustomer.name, fontSize = 14.sp, fontWeight = FontWeight(500))
+            Text(text = retailCustomer.name!!, fontSize = 14.sp, fontWeight = FontWeight(500))
             Spacer(modifier = Modifier.padding(2.dp))
-            Text(text = retailCustomer.phone, fontSize = 12.sp, fontWeight = FontWeight(400))
+            Text(text = retailCustomer.phone!!, fontSize = 12.sp, fontWeight = FontWeight(400))
         }
     }
 }

@@ -61,6 +61,7 @@ fun CustomOutlinedTextField(
                 text = label,
                 fontSize = 16.sp,
                 fontWeight = FontWeight(400),
+                color = Color(0xff44474f)
             )
         },
         textStyle = TextStyle(
@@ -108,12 +109,13 @@ fun CustomOutlinedTextFieldPassword(
         onValueChange = onValueChange,
         modifier = modifier
             .fillMaxWidth()
+            .height(70.dp)
             .background(Color.White),
         label = {
             Text(
                 text = label,
                 fontSize = 16.sp,
-                fontWeight = FontWeight(400),
+                color = Color(0xff44474f)
             )
         },
         textStyle = TextStyle(
@@ -182,6 +184,7 @@ fun CustomOutlinedTextField1(
                 text = label,
                 fontSize = 16.sp,
                 fontWeight = FontWeight(400),
+                color = Color(0xff44474f)
             )
         },
         textStyle = TextStyle(

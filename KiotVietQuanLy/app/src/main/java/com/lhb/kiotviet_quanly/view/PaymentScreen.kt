@@ -50,7 +50,8 @@ import com.lhb.kiotviet_quanly.view.components.TopBarPayment
 fun PaymentScreen(
     navController: NavController,
     totalAmount: Int,
-    totalQuantity: Int
+    totalQuantity: Int,
+    nameCustomer: String
 ) {
     var discount by remember { mutableStateOf("") }
     var showDialogConfirm by remember { mutableStateOf(false) }
@@ -222,7 +223,7 @@ fun PaymentScreen(
                                 .padding(horizontal = 10.dp, vertical = 20.dp),
                         ) {
                             ButtonChoosePaymentMethod(onClick = {
-                                navController.navigate("")
+                                navController.navigate("PaymentMethodScreen/$totalAmount")
                             })
                             Spacer(modifier = Modifier.height(20.dp))
                             Text(text = "Tiền khách trả",

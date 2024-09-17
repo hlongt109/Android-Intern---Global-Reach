@@ -48,7 +48,8 @@ fun TopBarOrderDetail(
     onClickToQR: () -> Unit,
     onClickToAdd: () -> Unit,
     clickRetailCustomer: () -> Unit,
-    navController: NavController
+    navController: NavController,
+    nameCustomer: String ?= ""
 ){
     var searchQuery by remember { mutableStateOf("") }
 
@@ -123,7 +124,7 @@ fun TopBarOrderDetail(
                     .padding(top = 10.dp),
             ) {
                 Row(
-                    modifier = Modifier.height(40.dp).clickable { clickRetailCustomer() },
+                    modifier = Modifier.clickable { clickRetailCustomer() }.height(40.dp),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Row {
@@ -131,6 +132,9 @@ fun TopBarOrderDetail(
                         Text(text = "Khách lẻ", color = Color(0xff404040), fontSize = 16.sp, modifier = Modifier.padding(horizontal = 10.dp), fontWeight = FontWeight.Bold)
                     }
                     Spacer(modifier = Modifier.weight(1f))
+                    if (nameCustomer != null) {
+                        Text(text = nameCustomer, color = Color(0xff404040), fontSize = 16.sp, modifier = Modifier.padding(horizontal = 10.dp), fontWeight = FontWeight.Bold)
+                    }
                     Icon(Icons.Outlined.ArrowForwardIos, contentDescription = "", tint = Color(0xff404040), modifier = Modifier.size(16.dp))
                 }
                 Spacer(modifier = Modifier.padding(5.dp))

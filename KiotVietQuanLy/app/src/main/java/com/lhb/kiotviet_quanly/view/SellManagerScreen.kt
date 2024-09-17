@@ -13,7 +13,9 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -23,26 +25,35 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import com.lhb.kiotviet_quanly.model.Product
-import com.lhb.kiotviet_quanly.model.ProductRepository.allProducts
 import com.lhb.kiotviet_quanly.view.components.BottomBarSellScreen
 import com.lhb.kiotviet_quanly.view.components.ItemProduct
 import com.lhb.kiotviet_quanly.view.components.ToggleBottom
 import com.lhb.kiotviet_quanly.view.components.TopBarOverView
 import com.lhb.kiotviet_quanly.view.components.TopBarSell
+import com.lhb.kiotviet_quanly.viewmodel.ProductViewModel
 
 @Composable
-fun SellManagerScreen(navController: NavController, onCartChange: (Int) -> Unit) {
+fun SellManagerScreen(
+    navController: NavController,
+    onCartChange: (Int) -> Unit,
+    productViewModel: ProductViewModel = viewModel()
+) {
+    val products by productViewModel.products.observeAsState(emptyList())
     var isSell by remember { mutableStateOf(false) }
-    val fakeProduct = allProducts
-    var selectedItems by remember { mutableStateOf(List(fakeProduct.size) { false }) }
+    var selectedItems by remember { mutableStateOf(emptyList<Boolean>()) }
     var itemCartNumber by remember { mutableIntStateOf(0) }
+
+    LaunchedEffect(products) {
+        selectedItems = List(products.size) { false }
+    }
+
     onCartChange(itemCartNumber)
+
     Scaffold(
         containerColor = Color(0xffF0F0F0),
-        modifier = Modifier
-            .navigationBarsPadding(),
+        modifier = Modifier.navigationBarsPadding(),
         topBar = {
             TopBarSell(
                 title = if (isSell) "Bán hàng" else "Đặt hàng",
@@ -62,11 +73,11 @@ fun SellManagerScreen(navController: NavController, onCartChange: (Int) -> Unit)
                 BottomBarSellScreen(
                     onClickToCancel = {
                         itemCartNumber = 0
-                        selectedItems = List(fakeProduct.size) { false }
+                        selectedItems = List(products.size) { false }
                     },
                     onClickToSaveCart = {
-                        val selectedProductIds = fakeProduct.filterIndexed{ index, _ -> selectedItems[index] }
-                            .joinToString(separator = "|"){it.id}
+                        val selectedProductIds = products.filterIndexed { index, _ -> selectedItems.getOrElse(index) { false } }
+                            .joinToString(separator = "|") { it.id }
                         navController.navigate("OrderDetailScreen/$selectedProductIds")
                     },
                     productNumber = itemCartNumber
@@ -101,26 +112,30 @@ fun SellManagerScreen(navController: NavController, onCartChange: (Int) -> Unit)
                 .padding(paddingValues)
         ) {
             LazyColumn {
-                items(fakeProduct.size) { index ->
-                    val isSelected = selectedItems[index]
-                    ItemProduct(
-                        product = fakeProduct[index],
-                        isSelected = isSelected, // Truyền trạng thái chọn
-                        onCLick = {
-                            if (isSelected) {
-                                itemCartNumber -= 1
-                            } else {
-                                itemCartNumber += 1
+                items(products.size) { index ->
+                    val isSelected = selectedItems.getOrElse(index) { false }
+                    products.getOrNull(index)?.let {
+                        ItemProduct(
+                            product = it,
+                            isSelected = isSelected,
+                            onCLick = {
+                                if (isSelected) {
+                                    itemCartNumber -= 1
+                                } else {
+                                    itemCartNumber += 1
+                                }
+                                selectedItems = selectedItems.toMutableList().apply {
+                                    if (index < size) {
+                                        this[index] = !isSelected
+                                    }
+                                }
+                                onCartChange(itemCartNumber)
+                            },
+                            onItemSelectedNumber = { number ->
+
                             }
-                            selectedItems = selectedItems.toMutableList().also {
-                                it[index] = !isSelected
-                            }
-                            onCartChange(itemCartNumber)
-                        },
-                        onItemSelectedNumber = { number ->
-                            // Xử lý thay đổi số lượng
-                        }
-                    )
+                        )
+                    }
                 }
             }
         }

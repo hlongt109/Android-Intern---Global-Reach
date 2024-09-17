@@ -1,4 +1,4 @@
-package com.lhb.kiotviet_quanly.view
+package com.lhb.kiotviet_quanly.view.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -13,7 +13,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Scaffold
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.ArrowBackIosNew
-import androidx.compose.material.icons.outlined.Menu
 import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -30,9 +29,6 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.lhb.kiotviet_quanly.ui.theme.ColorEff1f3
 import com.lhb.kiotviet_quanly.ui.theme.ColorTextBlue
-import com.lhb.kiotviet_quanly.view.components.CustomTextEnter
-import com.lhb.kiotviet_quanly.view.components.CustomTextFontSize
-import com.lhb.kiotviet_quanly.view.components.CustomTextSelected
 
 @Composable
 fun UpdateOtherInformationScreen(navController: NavController){

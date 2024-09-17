@@ -131,7 +131,7 @@ fun InformationProduct(product: Product){
                     modifier = Modifier.fillMaxWidth(),
                 ) {
                     Text(
-                        text = formatCurrency(product.price) ,
+                        text = formatCurrency(product.price!!) ,
                         color = Color(0xff4169E1),
                         fontSize = 20.sp,
                         fontWeight = FontWeight.SemiBold,

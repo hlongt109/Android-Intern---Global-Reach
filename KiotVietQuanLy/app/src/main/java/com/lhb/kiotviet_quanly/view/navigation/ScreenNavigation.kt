@@ -1,14 +1,19 @@
 package com.lhb.kiotviet_quanly.view.navigation
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.platform.LocalContext
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.lhb.kiotviet_quanly.model.ProductRepository.allProducts
 import com.lhb.kiotviet_quanly.view.AddDescriptionScreen
+import com.lhb.kiotviet_quanly.view.AddProductScreen
 import com.lhb.kiotviet_quanly.view.AddressScreen
 import com.lhb.kiotviet_quanly.view.CancelExportScreen
 import com.lhb.kiotviet_quanly.view.CheckInventoryScreen
@@ -19,6 +24,7 @@ import com.lhb.kiotviet_quanly.view.NewTradeMarkScreen
 import com.lhb.kiotviet_quanly.view.OnBoardingScreen
 import com.lhb.kiotviet_quanly.view.OrderDetailScreen
 import com.lhb.kiotviet_quanly.view.OrderScreen
+import com.lhb.kiotviet_quanly.view.PaymentMethodScreen
 import com.lhb.kiotviet_quanly.view.PaymentScreen
 import com.lhb.kiotviet_quanly.view.ProductDetailScreen
 import com.lhb.kiotviet_quanly.view.ProductOrderDetailScreen
@@ -28,18 +34,24 @@ import com.lhb.kiotviet_quanly.view.ReturnImportedGoodsScreen
 import com.lhb.kiotviet_quanly.view.SignInScreen
 import com.lhb.kiotviet_quanly.view.SignUpScreen
 import com.lhb.kiotviet_quanly.view.TradeMarkScreen
-import com.lhb.kiotviet_quanly.view.UpdateOtherInformationScreen
+import com.lhb.kiotviet_quanly.view.components.UpdateOtherInformationScreen
 import com.lhb.kiotviet_quanly.view.WarehouseCardScreen
 import com.lhb.kiotviet_quanly.view.WelcomeScreen
+import com.lhb.kiotviet_quanly.viewmodel.ProductViewModel
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun ScreenNavigation(){
     val navController = rememberNavController()
     val context = LocalContext.current
 
+    val productViewModel: ProductViewModel = viewModel()
+    val allProducts by productViewModel.products.observeAsState(emptyList())
+
+
     NavHost(
         navController = navController,
-        startDestination = "BottomTav"
+        startDestination = "WelcomeScreen"
     ) {
         composable(ScreenName.OnBoardingScreen.route){ OnBoardingScreen(navController = navController) }
         composable(ScreenName.WelcomeScreen.route){ WelcomeScreen(navController = navController) }
@@ -52,8 +64,7 @@ fun ScreenNavigation(){
         composable(ScreenName.CheckInventoryScreen.route){ CheckInventoryScreen(navController = navController)}
         composable(ScreenName.ReturnImportedGoodsScreen.route){ ReturnImportedGoodsScreen(navController = navController)}
         composable(ScreenName.CancelExportScreen.route){ CancelExportScreen(navController = navController)}
-        composable(ScreenName.ProductDetailScreen.route){ ProductDetailScreen(navController = navController)}
-        composable(ScreenName.UpdateOtherInformationScreen.route){ UpdateOtherInformationScreen(navController = navController)}
+        composable(ScreenName.UpdateOtherInformationScreen.route){ UpdateOtherInformationScreen(navController = navController) }
         composable(ScreenName.TrademarkScreen.route){ TradeMarkScreen(navController = navController)}
         composable(ScreenName.NewTrademarkScreen.route){ NewTradeMarkScreen(navController = navController)}
         composable(ScreenName.AddressScreen.route){ AddressScreen(navController = navController)}
@@ -61,6 +72,18 @@ fun ScreenNavigation(){
         composable(ScreenName.AddDescription.route){ AddDescriptionScreen(navController = navController) }
         composable(ScreenName.WarehouseCardScreen.route){ WarehouseCardScreen(navController = navController)}
         composable(ScreenName.InventoryLevels.route){ InventoryLevels(navController = navController)}
+
+        composable(
+            route = "ProductDetailScreen/{productId}",
+            arguments = listOf(navArgument("productId"){ type = NavType.StringType })
+        ){ navBackStackEntry ->
+            val productId = navBackStackEntry.arguments?.getString("productId")
+            val product = allProducts.firstOrNull{ it.id == productId }
+            product?.let {
+                ProductDetailScreen(navController = navController, product = it)
+            }
+
+        }
 
         composable(
             "OrderDetailScreen/{selectedProducts}",
@@ -86,17 +109,40 @@ fun ScreenNavigation(){
         }
 
         composable(
-            route = "Payment/{totalAmount}/{totalQuantity}",
+            route = "UpdateProduct/{productId}",
+            arguments = listOf(navArgument("productId") {type = NavType.StringType})
+        ){ navBackStackEntry ->
+            val productId = navBackStackEntry.arguments?.getString("productId")
+            val product = allProducts.firstOrNull{ it.id == productId }
+            product?.let {
+                AddProductScreen(navController = navController, product = it)
+            }
+        }
+
+        composable(
+            route = "Payment/{totalAmount}/{totalQuantity}/{nameCustomer}",
             arguments = listOf(
                 navArgument("totalAmount"){type = NavType.IntType},
-                navArgument("totalQuantity"){type = NavType.IntType}
+                navArgument("totalQuantity"){type = NavType.IntType},
+                navArgument("nameCustomer"){type = NavType.StringType}
             )
         ){ backStackEntry ->
             val totalAmount = backStackEntry.arguments?.getInt("totalAmount")?: 0
             val totalQuantity = backStackEntry.arguments?.getInt("totalQuantity")?: 0
-            PaymentScreen(navController = navController, totalAmount, totalQuantity)
+            val nameCustomer = backStackEntry.arguments?.getString("nameCustomer")?: ""
+            PaymentScreen(navController = navController, totalAmount, totalQuantity, nameCustomer)
         }
 
         composable(ScreenName.RetailCustomersScreen.route){ RetailCustomers(navController = navController)}
+
+        composable(
+            route = "PaymentMethodScreen/{totalAmount}",
+            arguments = listOf(navArgument("totalAmount"){type = NavType.IntType})
+        ){ backStackEntry ->
+            val totalAmount = backStackEntry.arguments?.getInt("totalAmount")?: 0
+            PaymentMethodScreen(totalAmount = totalAmount, navController = navController)
+        }
+
+        composable(ScreenName.AddProductScreen.route){ AddProductScreen(navController = navController) }
     }
 }

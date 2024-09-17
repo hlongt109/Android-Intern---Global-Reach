@@ -1,5 +1,7 @@
 package com.lhb.kiotviet_quanly.view.navigation
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.calculateEndPadding
@@ -45,6 +47,7 @@ import com.lhb.kiotviet_quanly.view.OverViewManagerScreen
 import com.lhb.kiotviet_quanly.view.ProductManagerScreen
 import com.lhb.kiotviet_quanly.view.SellManagerScreen
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun BottomTav(navController: NavController, isBottomBarVisible: Boolean = true){
     val navigationController = rememberNavController()

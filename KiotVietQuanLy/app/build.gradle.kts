@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -59,6 +60,10 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+    implementation(libs.firebase.auth)
+    implementation(libs.firebase.database)
+    implementation(libs.androidx.runtime.livedata)
+    implementation(libs.firebase.storage.ktx)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -73,4 +78,11 @@ dependencies {
     implementation ("androidx.compose.material:material:1.6.8")
     implementation ("com.google.android.material:material:1.6.0")
 
+    implementation(platform("com.google.firebase:firebase-bom:33.2.0"))
+    implementation("com.google.firebase:firebase-analytics")
+
+    implementation ("com.maxkeppeler.sheets-compose-dialogs:core:1.0.2")
+    implementation ("com.maxkeppeler.sheets-compose-dialogs:calendar:1.0.2")
+
+    implementation ("com.github.furkanaskin:ClickablePieChart:1.0.9")
 }

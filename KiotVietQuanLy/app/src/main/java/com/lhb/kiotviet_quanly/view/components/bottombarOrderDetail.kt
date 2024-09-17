@@ -34,7 +34,7 @@ fun BottomBarOrderDetail(
     productNumber: Int,
     totalAmount: Int,
     onClickPay: () -> Unit,
-    onClickAddToCard: () -> Unit
+    onClickAddToCard: () -> Unit,
 ) {
     Column(
         modifier = Modifier

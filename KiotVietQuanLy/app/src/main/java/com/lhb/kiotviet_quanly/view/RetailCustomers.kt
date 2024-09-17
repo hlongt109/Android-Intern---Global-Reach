@@ -1,5 +1,6 @@
 package com.lhb.kiotviet_quanly.view
 
+import DialogAddRetailCustomer
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -19,6 +20,7 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -28,22 +30,21 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import com.lhb.kiotviet_quanly.model.RetailCustomerRepository.allCustomer
-import com.lhb.kiotviet_quanly.view.components.CustomDialogDiscount
 import com.lhb.kiotviet_quanly.view.components.CustomTextFontSize
-import com.lhb.kiotviet_quanly.view.components.DialogAddRetailCustomer
 import com.lhb.kiotviet_quanly.view.components.ItemRetailCustomer
+import com.lhb.kiotviet_quanly.viewmodel.RetailCustomerViewModel
 
 @Composable
-fun RetailCustomers(navController: NavController) {
-    val fakeCustomers = allCustomer
+fun RetailCustomers(navController: NavController, retailCustomerViewModel: RetailCustomerViewModel = viewModel()) {
+    val fakeCustomers by retailCustomerViewModel.retailCustomers.observeAsState(emptyList())
     var showDialog by remember { mutableStateOf(false) }
 
     if (showDialog) {
         Dialog(onDismissRequest = { showDialog = false }) {
-            DialogAddRetailCustomer()
+            DialogAddRetailCustomer(onDismiss = {showDialog = false})
         }
     }
 
@@ -92,7 +93,13 @@ fun RetailCustomers(navController: NavController) {
                 items(fakeCustomers.size) { index ->
                     ItemRetailCustomer(
                         retailCustomer = fakeCustomers[index],
-                        clickToSelectRetailCustomer = {}
+                        clickToSelectRetailCustomer = {
+                            navController.previousBackStackEntry?.savedStateHandle?.set(
+                                "selectedCustomerName",
+                                fakeCustomers[index].name
+                            )
+                            navController.popBackStack()
+                        }
                     )
                 }
             }

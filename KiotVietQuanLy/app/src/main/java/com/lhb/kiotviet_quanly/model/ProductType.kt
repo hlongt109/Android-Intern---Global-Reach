@@ -1,9 +1,6 @@
 package com.lhb.kiotviet_quanly.model
 
-data class RetailCustomer(
+data class ProductType(
     val id: String ?= "",
     val name: String ?= "",
-    val phone: String ?= "",
-    val imageUrl: String ?= ""
 )
-

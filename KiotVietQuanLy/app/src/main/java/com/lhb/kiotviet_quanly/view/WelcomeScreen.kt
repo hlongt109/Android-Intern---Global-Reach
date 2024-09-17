@@ -19,22 +19,25 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.lhb.kiotviet_quanly.R
+import com.lhb.kiotviet_quanly.utils.isLoggedIn
 import com.lhb.kiotviet_quanly.utils.isOnBoardingCompleted
 import kotlinx.coroutines.delay
 
 @Composable
-fun WelcomeScreen(navController: NavController){
+fun WelcomeScreen(navController: NavController) {
 
     val context = LocalContext.current
 
-    LaunchedEffect( Unit ) {
-        val nextScreen = if(isOnBoardingCompleted(context)){
+    LaunchedEffect(Unit) {
+        val nextScreen = if (isLoggedIn(context)) {
+            "bottomTav"
+        } else if (isOnBoardingCompleted(context)) {
             "SignInScreen"
-        }else{
+        } else {
             "OnBoardingScreen"
         }
-        delay(3000)
-        navController.navigate(nextScreen){
+        delay(3000) // Thời gian hiển thị WelcomeScreen
+        navController.navigate(nextScreen) {
             popUpTo("WelcomeScreen") { inclusive = true }
         }
     }

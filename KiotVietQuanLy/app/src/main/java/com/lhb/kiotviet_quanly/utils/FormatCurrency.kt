@@ -1,6 +1,5 @@
 package com.lhb.kiotviet_quanly.utils
 
-import com.lhb.kiotviet_quanly.model.Bill
 import java.text.NumberFormat
 import java.util.Locale
 

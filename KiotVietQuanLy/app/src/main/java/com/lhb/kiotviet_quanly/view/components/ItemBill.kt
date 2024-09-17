@@ -25,7 +25,7 @@ import com.lhb.kiotviet_quanly.utils.formatCurrency
 fun ItemBill(
     bill: Bill
 ){
-    val formattedAmount = formatCurrency(bill.totalAmount)
+    val formattedAmount = formatCurrency(bill.totalAmount!!)
    Box(
        modifier = Modifier
            .fillMaxWidth()
@@ -35,7 +35,7 @@ fun ItemBill(
        Column(
            modifier = Modifier.fillMaxWidth()
        ) {
-           Text(text = bill.date, color = Color(0xff505050), fontSize = 16.sp, fontWeight = FontWeight.Medium)
+           Text(text = bill.date!!, color = Color(0xff505050), fontSize = 16.sp, fontWeight = FontWeight.Medium)
            Spacer(modifier = Modifier.height(10.dp))
            Row(
                modifier = Modifier.fillMaxWidth(),
@@ -43,7 +43,7 @@ fun ItemBill(
                horizontalArrangement = Arrangement.SpaceBetween
            ) {
                Column {
-                   Text(text = bill.customerName, color = Color(0xff303030), fontSize = 18.sp, fontWeight = FontWeight.Medium)
+                   Text(text = bill.customerName!!, color = Color(0xff303030), fontSize = 18.sp, fontWeight = FontWeight.Medium)
                    Text(text = bill.date + " - " +bill.productId, color = Color(0xff505050), fontSize = 14.sp, fontWeight = FontWeight.Medium)
                    Text(text = bill.productName + " x" +bill.quantity.toString(), color = Color(0xff505050), fontSize = 14.sp, fontWeight = FontWeight.Medium)
                    Text(text = "+1 sản phẩm khác", color = Color(0xff505050), fontSize = 14.sp, fontWeight = FontWeight.Medium)
@@ -53,7 +53,7 @@ fun ItemBill(
                    horizontalAlignment = Alignment.End
                ) {
                    Text(text = formattedAmount, color = Color(0xff303030), fontSize = 18.sp, fontWeight = FontWeight.Medium)
-                   Text(text = bill.paymentMrthod, color = Color(0xff505050), fontSize = 14.sp, fontWeight = FontWeight.Medium)
+                   Text(text = bill.paymentMrthod!!, color = Color(0xff505050), fontSize = 14.sp, fontWeight = FontWeight.Medium)
                }
            }
        }

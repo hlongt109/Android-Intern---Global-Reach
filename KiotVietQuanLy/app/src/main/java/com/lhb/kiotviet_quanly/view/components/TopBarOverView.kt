@@ -34,7 +34,8 @@ import com.lhb.kiotviet_quanly.R
 fun TopBarOverView(
     onClickToNotification: () -> Unit,
     onClickToEmail: () -> Unit,
-    onClickTopShowBottomSheetDate: () -> Unit
+    onClickTopShowBottomSheetDate: () -> Unit,
+    formattedDate: String? = null
 ){
     Column(
         modifier = Modifier
@@ -65,14 +66,14 @@ fun TopBarOverView(
             modifier = Modifier
                 .padding(top = 20.dp)
                 .clip(RoundedCornerShape(15.dp))
-                .background(Color(0xffEFEFEF))
-                .padding(horizontal = 10.dp, vertical = 5.dp)
                 .clickable {
                     onClickTopShowBottomSheetDate()
-                },
+                }
+                .background(Color(0xffEFEFEF))
+                .padding(horizontal = 10.dp, vertical = 5.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Text(text = "Hôm nay, 14/08/2024", fontSize = 12.sp, fontWeight = FontWeight.Medium, color = Color(0xff303030))
+            Text(text = formattedDate!!, fontSize = 12.sp, fontWeight = FontWeight.Medium, color = Color(0xff303030))
             Icon(Icons.Outlined.ArrowDropDown, contentDescription = "", tint = Color.Gray)
         }
     }

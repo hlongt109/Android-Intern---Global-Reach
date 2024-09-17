@@ -93,7 +93,7 @@ fun ItemOrderDetail(
                     modifier = Modifier.fillMaxWidth(),
                 ) {
                     Text(
-                        text = formatCurrency(product.price),
+                        text = formatCurrency(product.price!!),
                         color = Color(0xff4169E1),
                         fontSize = 16.sp,
                         fontWeight = FontWeight.SemiBold,
@@ -157,18 +157,3 @@ fun ItemOrderDetail(
     }
 }
 
-@Composable
-@Preview
-fun ItemOrderDetailPreview() {
-    ItemOrderDetail(
-        product = Product(
-            id = "1",
-            name = "Product 1",
-            price = 10000,
-            image = "https://example.com/image1.jpg",
-            exist = 1
-        ),
-        onCLick = {},
-        onItemSelectedNumber = {}
-    )
-}

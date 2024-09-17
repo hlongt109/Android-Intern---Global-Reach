@@ -34,7 +34,7 @@ import com.lhb.kiotviet_quanly.view.components.InformationProduct
 @Composable
 fun ProductOrderDetailScreen(navController: NavController, product: Product, initialQuantity: Int) {
     var itemNumber by remember { mutableIntStateOf(initialQuantity) }
-    var totalAmount by remember { mutableIntStateOf(product.price * initialQuantity) }
+    var totalAmount by remember { mutableIntStateOf(product.price!! * initialQuantity) }
     var discountAmount by remember { mutableIntStateOf(0) }
 
     Scaffold(
@@ -59,9 +59,18 @@ fun ProductOrderDetailScreen(navController: NavController, product: Product, ini
                     .padding(10.dp)
             ) {
                 CustomButtonBlue(
-                    onClick = { /* Xử lý khi người dùng nhấn nút Xong */ },
+                    onClick = {
+                        navController.previousBackStackEntry
+                            ?.savedStateHandle
+                            ?.set("updatedPrice", totalAmount - discountAmount) // Cập nhật giá đã giảm
+                        navController.previousBackStackEntry
+                            ?.savedStateHandle
+                            ?.set("updatedProductId", product.id)
+                        navController.popBackStack() // Quay lại màn hình trước
+                    },
                     title = "Xong"
                 )
+
                 Spacer(modifier = Modifier.padding(10.dp))
             }
         }
@@ -76,13 +85,15 @@ fun ProductOrderDetailScreen(navController: NavController, product: Product, ini
                     initialQuantity = initialQuantity,
                     onItemSelectedNumber = { number ->
                         itemNumber = number
-                        totalAmount = product.price * itemNumber
+                        totalAmount = product.price!! * itemNumber
                     }
                 )
 
-                ContentSecond(title = "Đơn giá", price = product.price, onApplyDiscount = { discount ->
+                ContentSecond(title = "Đơn giá", price = product.price!!, onApplyDiscount = { discount ->
                     discountAmount = discount
+                    totalAmount = (product.price!! * itemNumber) - discountAmount // Tính lại tổng tiền sau giảm giá
                 })
+
                 CustomDivider()
                 ContentSecond(title = "Giảm giá", price = discountAmount, onApplyDiscount = { discount ->
                     discountAmount = discount

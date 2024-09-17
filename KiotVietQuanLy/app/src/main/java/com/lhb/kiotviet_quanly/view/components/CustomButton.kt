@@ -51,10 +51,11 @@ fun CustomButtonTransparent(
 @Composable
 fun CustomButtonBlue(
     onClick: () -> Unit,
-    title: String
+    title: String,
+    isLoading: Boolean = false
 ){
     Button(
-        onClick = { onClick() },
+        onClick = { if (!isLoading) onClick() },
         modifier = Modifier
             .fillMaxWidth()
             .height(60.dp)

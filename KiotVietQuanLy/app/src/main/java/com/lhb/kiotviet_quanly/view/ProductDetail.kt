@@ -46,6 +46,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import coil.compose.AsyncImage
+import com.lhb.kiotviet_quanly.model.Product
 import com.lhb.kiotviet_quanly.ui.theme.ColorEff1f3
 import com.lhb.kiotviet_quanly.ui.theme.ColorTextBlue
 import com.lhb.kiotviet_quanly.ui.theme.ColorTextGray
@@ -58,7 +59,7 @@ import com.lhb.kiotviet_quanly.view.components.ShowBottomSheet
 @OptIn(ExperimentalMaterial3Api::class)
 @SuppressLint("InvalidColorHexValue")
 @Composable
-fun ProductDetailScreen(navController: NavController){
+fun ProductDetailScreen(navController: NavController, product: Product){
 
     val checkedState = remember {
         mutableStateOf(false)
@@ -110,16 +111,18 @@ fun ProductDetailScreen(navController: NavController){
                         horizontalArrangement = Arrangement.SpaceBetween
                     ) {
                         CustomTextFontSize(title = "THÔNG TIN CƠ BẢN", color = ColorTextGray, fontSize = 18)
-                        CustomTextFontSize(title = "Sửa", color = ColorTextBlue, fontSize = 18)
+                        CustomTextFontSize(title = "Sửa", color = ColorTextBlue, fontSize = 18, modifier = Modifier.clickable { navController.navigate("UpdateProduct/${product.id}") })
                     }
+                    Spacer(modifier = Modifier.padding(10.dp))
                     AsyncImage(
-                        model = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqiFYIeYP6bnplXlsytmFtwKAMA4qmWkwGuodtsje6l3aNTgxL4NEVoYpcpIv6kPY05vw&usqp=CAU",
+                        model = product.image,
                         contentDescription = null,
                         modifier = Modifier.size(100.dp),
                         contentScale = ContentScale.Crop
                     )
-                    CustomTextFontSize(title = "Thắt lưng nữ màu vàng", color = Color.Black, fontSize = 22)
-                    InformationProduct(productCode = "Mã hàng", code = "NU016", modifier = Modifier.fillMaxWidth())
+                    Spacer(modifier = Modifier.padding(10.dp))
+                    CustomTextFontSize(title = product.name, color = Color.Black, fontSize = 22)
+                    InformationProduct(productCode = "Mã hàng", code = product.id, modifier = Modifier.fillMaxWidth())
                     Divider()
                     InformationProduct(productCode = "Mã vạch", code = "", modifier = Modifier.fillMaxWidth(), displayIcons = false)
                     Divider()
@@ -132,13 +135,13 @@ fun ProductDetailScreen(navController: NavController){
                             .weight(1f)
                             .fillMaxHeight()
                             .padding(end = 25.dp)) {
-                            InformationProduct(productCode = "Giá vốn", code = formatCurrency(1920000), displayIcons = false )
+                            InformationProduct(productCode = "Giá vốn", code = formatCurrency(product.originalPrice!!), displayIcons = false )
                             Divider()
                         }
                         Column(modifier = Modifier
                             .weight(1f)
                             .fillMaxHeight()) {
-                            InformationProduct(productCode = "Giá bán", code = formatCurrency(4300000), displayIcons = false)
+                            InformationProduct(productCode = "Giá bán", code = formatCurrency(product.price!!), displayIcons = false)
                             Divider()
                         }
                     }
@@ -150,14 +153,14 @@ fun ProductDetailScreen(navController: NavController){
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         Column(modifier = Modifier.weight(1f)) {
-                            InformationProduct(productCode = "Nhóm hàng", code = "Phụ kiện nữ", displayIcons = false )
+                            InformationProduct(productCode = "Nhóm hàng", code = product.productType!!, displayIcons = false )
                             Divider()
                         }
                         Spacer(modifier = Modifier.padding(10.dp))
                         Column(modifier = Modifier
                             .weight(1f)
                             .padding(start = 14.dp)) {
-                            InformationProduct(productCode = "Tồn kho", code = formatCurrency(0), displayIcons = false)
+                            InformationProduct(productCode = "Tồn kho", code = formatCurrency(product.inventory!!), displayIcons = false)
                             Divider()
                         }
                         IconButton(onClick = { /*TODO*/ }) {
@@ -172,10 +175,11 @@ fun ProductDetailScreen(navController: NavController){
                 Column(
                     modifier = Modifier
                         .clip(RoundedCornerShape(15.dp))
+                        .clickable { navController.navigate("AddDescription") }
                         .background(ColorWhite)
                         .fillMaxWidth()
                         .padding(15.dp)
-                        .clickable { navController.navigate("AddDescription") }
+
                 ) {
                     CustomTextFontSize(title = "Thêm mô tả", color = ColorTextBlue, fontSize = 22)
                 }
@@ -206,10 +210,14 @@ fun ProductDetailScreen(navController: NavController){
                         .fillMaxWidth()
                         .padding(15.dp)
                 ) {
-                    Row(modifier = Modifier.fillMaxWidth().clickable { navController.navigate("WarehouseCardScreen") }, horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
+                    Row(modifier = Modifier
+                        .fillMaxWidth()
+                        .clickable { navController.navigate("WarehouseCardScreen") }, horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
                         CustomTextFontSize(title = "Thẻ kho", color = Color.Black, fontSize = 18)
                         IconButton(onClick = { /*TODO*/ }) {
-                            Icon(Icons.Default.ArrowForwardIos, contentDescription = null, modifier = Modifier.size(20.dp).clickable { navController.navigate("WarehouseCardScreen") })
+                            Icon(Icons.Default.ArrowForwardIos, contentDescription = null, modifier = Modifier
+                                .size(20.dp)
+                                .clickable { navController.navigate("WarehouseCardScreen") })
                         }
                     }
                 }
@@ -278,10 +286,4 @@ fun ProductDetailScreen(navController: NavController){
             }
         }
     }
-}
-
-@Composable
-@Preview
-fun ProductDetailScreen(){
-    ProductDetailScreen(navController = rememberNavController())
 }

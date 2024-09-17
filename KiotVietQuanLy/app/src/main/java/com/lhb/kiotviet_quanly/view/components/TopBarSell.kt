@@ -1,5 +1,6 @@
 package com.lhb.kiotviet_quanly.view.components
 
+import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -12,6 +13,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Button
+import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Add
 import androidx.compose.material.icons.outlined.Assignment
@@ -24,6 +27,7 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -37,7 +41,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.lhb.kiotviet_quanly.R
+import com.lhb.kiotviet_quanly.viewmodel.CartViewModel
 
 @Composable
 fun TopBarSell(
@@ -45,7 +51,11 @@ fun TopBarSell(
     onClickToQR: () -> Unit,
     onClickToAdd: () -> Unit
 ){
+    val cartViewModel: CartViewModel = viewModel()
+    val carts by cartViewModel.carts.observeAsState(emptyList())
+    Log.d("CartList", "TopBarSell: " + carts.size)
     var searchQuery by remember { mutableStateOf("") }
+
 
     Column(
         modifier = Modifier
@@ -65,7 +75,7 @@ fun TopBarSell(
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Text(text = title, fontSize = 28.sp, color = Color(0xff303030), fontWeight = FontWeight.Bold)
-                IconButton(onClick = { }) { Icon(Icons.Outlined.Assignment, contentDescription = "", tint = Color(0xff303030), modifier = Modifier.size(24.dp)) }
+                IconButton(onClick = { }) { Icon(Icons.Outlined.Assignment, contentDescription = "", tint = if(carts.isNotEmpty()) Color.Red else Color(0xff303030), modifier = Modifier.size(24.dp)) }
             }
             Spacer(modifier = Modifier.height(10.dp))
             Row(
@@ -115,19 +125,39 @@ fun TopBarSell(
                     .padding(top = 10.dp),
                 verticalAlignment = Alignment.CenterVertically,
             ) {
-                Row(
-                    verticalAlignment = Alignment.CenterVertically
+                Button(
+                    onClick = { /*TODO*/ },
+                    colors = ButtonDefaults.buttonColors(
+                        backgroundColor = Color.Transparent,
+                        contentColor = Color.Transparent
+                    ),
+                    elevation = ButtonDefaults.elevation(0.dp),
                 ) {
-                    Icon(Icons.Outlined.Person, contentDescription = "", tint = Color(0xff404040), modifier = Modifier.size(16.dp))
-                    Text(text = "Khách lẻ", color = Color(0xff404040), fontSize = 12.sp, modifier = Modifier.padding(horizontal = 10.dp))
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Icon(Icons.Outlined.Person, contentDescription = "", tint = Color(0xff404040), modifier = Modifier.size(16.dp))
+                        Text(text = "Khách lẻ", color = Color(0xff404040), fontSize = 12.sp, modifier = Modifier.padding(horizontal = 10.dp))
+                    }
                 }
-                Row(
-                    modifier = Modifier.padding(start = 15.dp),
-                    verticalAlignment = Alignment.CenterVertically
+
+                Button(
+                    onClick = { /*TODO*/ },
+                    colors = ButtonDefaults.buttonColors(
+                        backgroundColor = Color.Transparent,
+                        contentColor = Color.Transparent
+                    ),
+                    elevation = ButtonDefaults.elevation(0.dp),
                 ) {
-                    Icon(painter = painterResource(id = R.drawable.price), contentDescription = "", tint = Color(0xff303030), modifier = Modifier.size(15.dp))
-                    Text(text = "Bảng giá chung", color = Color(0xff404040), fontSize = 12.sp, modifier = Modifier.padding(horizontal = 10.dp))
+                    Row(
+                        modifier = Modifier.padding(start = 15.dp),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Icon(painter = painterResource(id = R.drawable.price), contentDescription = "", tint = Color(0xff303030), modifier = Modifier.size(15.dp))
+                        Text(text = "Bảng giá chung", color = Color(0xff404040), fontSize = 12.sp, modifier = Modifier.padding(horizontal = 10.dp))
+                    }
                 }
+
             }
         }
     }
